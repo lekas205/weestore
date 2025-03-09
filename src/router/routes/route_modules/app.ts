@@ -1,6 +1,11 @@
 import { ROUTES } from '../routes'
 export default [
   {
+    path: '/',
+    redirect: '/home',
+  },
+
+  {
     path: ROUTES.home.path,
     name: ROUTES.home.name,
     component: () => import(/* webpackChunkName: "about" */ '@/views/home/index.vue'),

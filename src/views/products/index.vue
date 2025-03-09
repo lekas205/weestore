@@ -33,11 +33,15 @@ import { ref } from 'vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ProductItem from '@/components/Global/ProductItem.vue'
 import ProductDetails from '@/components/Global/ProductDetails.vue'
-
+type ProductType = {
+  name: string
+  price: number
+  available: boolean
+}
 const showDetails = ref(false)
-const productDetails = ref({})
+const productDetails = ref<ProductType>()
 
-const showProductDetails = (product: any) => {
+const showProductDetails = (product: ProductType) => {
   productDetails.value = product
   showDetails.value = true
 }

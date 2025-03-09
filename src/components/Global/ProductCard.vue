@@ -17,12 +17,17 @@
 </template>
 
 <script setup lang="ts">
+type ProductType = {
+  name: string
+  price: number
+  available: boolean
+}
 const props = defineProps<{
-  product: any
+  product: ProductType | undefined
 }>()
 
 const emit = defineEmits<{
-  (e: 'showProductDetails', val: any): void
+  (e: 'showProductDetails', val: ProductType | undefined): void
 }>()
 
 const openDetails = () => {

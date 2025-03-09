@@ -17,7 +17,7 @@
 
     <v-row>
       <v-col cols="6" v-for="i in 6" :key="i">
-        <ProductCard @show-product-details="showProductDetails" />
+        <ProductCard :product="productDetails" @show-product-details="showProductDetails" />
       </v-col>
     </v-row>
 
@@ -30,11 +30,15 @@ import { ref } from 'vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ProductCard from '@/components/Global/ProductCard.vue'
 import ProductDetails from '@/components/Global/ProductDetails.vue'
-
+type ProductType = {
+  name: string
+  price: number
+  available: boolean
+}
 const showDetails = ref(false)
-const productDetails = ref({})
+const productDetails = ref<ProductType>()
 
-const showProductDetails = (product: any) => {
+const showProductDetails = (product: ProductType | undefined) => {
   productDetails.value = product
   showDetails.value = true
 }

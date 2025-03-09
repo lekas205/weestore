@@ -37,17 +37,17 @@
         >
           <swiper-slide class="product-slide">
             <div class="tw-h-[310px] tw-w-[182px]">
-              <ProductCard @show-product-details="showProductDetails" />
+              <ProductCard :product="productDetails" @show-product-details="showProductDetails" />
             </div>
           </swiper-slide>
           <swiper-slide class="product-slide">
-            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard /></div
+            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard :product="productDetails" /></div
           ></swiper-slide>
           <swiper-slide class="product-slide">
-            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard /></div
+            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard :product="productDetails" /></div
           ></swiper-slide>
           <swiper-slide class="product-slide">
-            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard /></div>
+            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard :product="productDetails" /></div>
           </swiper-slide>
         </swiper>
       </v-tab-item>
@@ -65,14 +65,19 @@ import ProductCard from '@/components/Global/ProductCard.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import AppBottomBar from '@/components/Global/AppBottomBar.vue'
 
+type ProductType = {
+  name: string
+  price: number
+  available: boolean
+}
 const tab = ref('')
 const showDetails = ref(false)
-const productDetails = ref({})
+const productDetails = ref<ProductType>()
 const categories = ref(['pasta', 'noodles', 'semovita', 'oil'])
 
 import { Pagination } from 'swiper/modules'
 
-const showProductDetails = (product: any) => {
+const showProductDetails = (product: ProductType | undefined) => {
   productDetails.value = product
   showDetails.value = true
 }
