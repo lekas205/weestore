@@ -7,17 +7,17 @@
       <img src="@/assets/images/png/avatar.png" class="tw-h-[101px] tw-w-[91px]" alt="" />
 
       <section>
-        <h4 class="tw-text-[18px]">Jones Samuel</h4>
-        <p class="tw-opacity-50 mb-2">Dosamarvis@gmail.com</p>
+        <h4 class="tw-text-[18px]">{{ profile?.fullname }}</h4>
+        <p class="tw-opacity-50 mb-2">{{ profile?.email }}</p>
         <hr />
-        <p class="tw-opacity-50 py-2">+234 9011039271</p>
+        <p class="tw-opacity-50 py-2">{{ profile?.phone }}</p>
         <hr />
-        <p class="tw-opacity-50 py-2">No 23, Seun Kuti Rd Ikeja Lagos</p>
+        <p class="tw-opacity-50 py-2">{{ profile?.address }}</p>
         <hr />
         <div class="tw-opacity-50 pt-2">
-          <p>Jones Samuel</p>
-          <p>09190029910</p>
-          <p>Zenith Bank</p>
+          <p>{{ profile?.bank?.accountName }}</p>
+          <p>{{ profile?.bank?.accountNumber }}</p>
+          <p>{{ profile?.bank?.bankName }}</p>
         </div>
       </section>
     </div>
@@ -44,7 +44,7 @@
         @click="showBankAccount = true"
         class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px] tw-flex tw-justify-between tw-items-center"
       >
-        Change Bank Account
+        {{ profile?.bank?.bankName ? 'Change Bank Account' : 'Add Bank Account' }}
         <img src="@/assets/images/svgs/back.svg" class="tw-rotate-180" alt="" />
       </li>
 
@@ -60,10 +60,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
 import ChangePin from '@/components/Modals/ChangePin.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ChangeAddress from '@/components/Modals/ChangeAddress.vue'
 import ChangeBankAccount from '@/components/Modals/ChangeBankAccount.vue'
+import { useUserStore } from '@/stores/user.ts'
+
+const userStore = useUserStore()
+
+const { profile } = storeToRefs(userStore)
 
 const showChangePin = ref(false)
 const showChangeAddress = ref(false)

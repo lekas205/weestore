@@ -31,7 +31,7 @@
       </p>
     </div>
 
-    <v-btn class="!tw-h-[70px] !tw-rounded-full mt-auto" color="#FA4A0C"> Continue Ordering</v-btn>
+    <v-btn class="!tw-h-[70px] !tw-rounded-full mt-auto" color="primary"> Continue Ordering</v-btn>
   </div>
 </template>
 

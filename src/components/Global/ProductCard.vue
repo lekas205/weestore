@@ -6,7 +6,11 @@
     <img
       src="https://plus.unsplash.com/premium_photo-1740708549031-fd00d8821c5b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"
       alt="Product Image"
-      class="tw-w-[152px] tw-h-[152px] tw-rounded-full tw-object-cover tw-mt-[-100px]"
+      class="tw-rounded-full tw-object-cover tw-mt-[-100px]"
+      :class="{
+        'tw-w-[152px] tw-h-[152px]': size === 'large',
+        'tw-w-[120px] tw-h-[120px]': size === 'small',
+      }"
     />
     <div class="">
       <p class="tw-text-[22px] mt-5 mx-auto tw-leading-7 tw-mb-2">Spagettini Fat</p>
@@ -23,6 +27,7 @@ type ProductType = {
   available: boolean
 }
 const props = defineProps<{
+  size: 'large' | 'small'
   product: ProductType | undefined
 }>()
 

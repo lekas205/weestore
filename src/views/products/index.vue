@@ -29,10 +29,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ProductItem from '@/components/Global/ProductItem.vue'
 import ProductDetails from '@/components/Global/ProductDetails.vue'
+import { useProductsStore } from '@/stores/products.ts'
+
+const productStore = useProductsStore()
+
 type ProductType = {
   name: string
   price: number
@@ -45,4 +49,8 @@ const showProductDetails = (product: ProductType) => {
   productDetails.value = product
   showDetails.value = true
 }
+
+onMounted(async () => {
+  await productStore.fetchProducts()
+})
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div
-    class="tw-bg-white tw-w-full py-5 px-4 tw-rounded-[20px] tw-p-6 tw-flex tw-gap-3 tw-mb-3 tw-shadow-sm"
+    class="tw-bg-white tw-items-center tw-w-full py-5 px-4 tw-rounded-[20px] tw-p-6 tw-flex tw-gap-3 tw-mb-3 tw-shadow-sm"
   >
-    <img :src="url" alt="Product Item" class="tw-rounded-full tw-h-[80px] tw-w-[80px]" />
+    <img :src="url" alt="Product Item" class="tw-rounded-full tw-h-[60px] tw-w-[60px]" />
     <slot />
   </div>
 </template>

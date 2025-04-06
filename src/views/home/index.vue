@@ -37,17 +37,25 @@
         >
           <swiper-slide class="product-slide">
             <div class="tw-h-[310px] tw-w-[182px]">
-              <ProductCard :product="productDetails" @show-product-details="showProductDetails" />
+              <ProductCard
+                size="large"
+                :product="productDetails"
+                @show-product-details="showProductDetails"
+              />
             </div>
           </swiper-slide>
           <swiper-slide class="product-slide">
-            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard :product="productDetails" /></div
+            <div class="tw-h-[310px] tw-w-[182px]">
+              <ProductCard size="large" :product="productDetails" /></div
           ></swiper-slide>
           <swiper-slide class="product-slide">
-            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard :product="productDetails" /></div
+            <div class="tw-h-[310px] tw-w-[182px]">
+              <ProductCard size="large" :product="productDetails" /></div
           ></swiper-slide>
           <swiper-slide class="product-slide">
-            <div class="tw-h-[310px] tw-w-[182px]"><ProductCard :product="productDetails" /></div>
+            <div class="tw-h-[310px] tw-w-[182px]">
+              <ProductCard size="large" :product="productDetails" />
+            </div>
           </swiper-slide>
         </swiper>
       </v-tab-item>

@@ -5,7 +5,12 @@
       <p>Login to your Account</p>
 
       <div class="mt-10">
-        <v-text-field hide-details="auto" label="PIN" type="password"></v-text-field>
+        <v-text-field
+          hide-details="auto"
+          label="PIN"
+          type="password"
+          v-model="form.pin"
+        ></v-text-field>
       </div>
 
       <div class="tw-flex tw-justify-between tw-mt-10">
@@ -24,7 +29,14 @@
       <RouterLink :to="ROUTES.login.path" class="tw-text-[18px] tw-text-center tw-text-primary mb-8"
         >Not a User? Signup Here</RouterLink
       >
-      <v-btn class="!tw-h-[70px] !tw-rounded-full" color="#FA4A0C"> Login</v-btn>
+      <v-btn
+        class="!tw-h-[70px] !tw-rounded-full"
+        color="#FA4A0C"
+        @click="submit"
+        :loading="loading"
+      >
+        Login</v-btn
+      >
     </div>
   </div>
 </template>
@@ -32,6 +44,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { ROUTES } from '../../router/routes/routes'
+import { useAuthStore } from '@/stores/auth.ts'
 
 const user = ref('Michael')
+
+const authStore = useAuthStore()
+
+const form = ref({
+  email: '',
+  pin: '',
+})
+
+const loading = ref(false)
+
+const submit = async () => {
+  loading.value = true
+  const res = await authStore.initiateLogin({})
+
+  if (res) {
+  }
+  loading.value = false
+}
 </script>

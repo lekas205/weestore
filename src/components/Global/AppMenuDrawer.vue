@@ -4,15 +4,15 @@
       v-model="showDrawer"
       temporary
       :width="450"
-      color="#FA4A0C"
+      color="primary"
       class="tw-relative"
     >
-      <section class="tw-p-10 tw-h-full">
+      <section class="tw-py-10 tw-px-7 tw-h-full">
         <button class="tw-absolute tw-top-6 tw-z-3 tw-right-5" @click="showDrawer = false">
           <img src="@/assets/images/svgs/close-light.svg" width="20px" alt="" />
         </button>
-        <div class="tw-absolute tw-top-[50%] tw-z-3 tw-right-0 -tw-translate-y-1/2">
-          <img src="@/assets/images/svgs/app-mock-up.svg" alt="" />
+        <div class="tw-absolute tw-h-[80vh] tw-top-[50%] tw-z-3 -tw-right-7 -tw-translate-y-1/2">
+          <img src="@/assets/images/svgs/app-mock-up.svg" class="tw-h-full" alt="" />
         </div>
 
         <section class="tw-flex tw-flex-col tw-h-[90%] tw-mt-8">

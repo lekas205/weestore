@@ -10,14 +10,18 @@
       <div class="mb-6">
         <input
           placeholder="Search"
-          class="tw-px-10 tw-py-4 tw-w-full tw-text-[20px] tw-rounded-full tw-shadow-lg tw-bg-white tw-outline-primary"
+          class="tw-px-10 tw-py-4 tw-w-full tw-text-[20px] tw-rounded-full tw-shadow-lg tw-bg-white !tw-outline-primary"
         />
       </div>
     </div>
 
     <v-row>
       <v-col cols="6" v-for="i in 6" :key="i">
-        <ProductCard :product="productDetails" @show-product-details="showProductDetails" />
+        <ProductCard
+          size="small"
+          :product="productDetails"
+          @show-product-details="showProductDetails"
+        />
       </v-col>
     </v-row>
 
