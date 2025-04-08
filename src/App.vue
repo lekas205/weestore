@@ -15,7 +15,7 @@ onMounted(() => {
     position: 'top-right',
     duration: 6000,
   })
-  if (localStorage.getItem(' ACCESS_TOKEN')) {
+  if (localStorage.getItem('ACCESS_TOKEN')) {
     userStore.getProfile()
   }
 })

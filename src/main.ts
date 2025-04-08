@@ -16,7 +16,7 @@ import 'swiper/css/pagination'
 import Private from './layouts/private.vue'
 import Public from './layouts/public.vue'
 
-const token = localStorage.getItem(' ACCESS_TOKEN')
+const token = localStorage.getItem('ACCESS_TOKEN')
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
 import 'vue-toast-notification/dist/theme-bootstrap.css'

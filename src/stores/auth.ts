@@ -28,7 +28,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.loginUser(payload)
       if (status === 200 || status === 201) {
-        localStorage.setItem(' ACCESS_TOKEN', data.payload.access_token)
+        localStorage.setItem('ACCESS_TOKEN', data.payload.access_token)
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.payload.access_token}`
 
         userStore.getProfile()
@@ -99,7 +99,7 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.verifyAccount(payload)
       if (status === 200 || status === 201) {
-        localStorage.setItem(' ACCESS_TOKEN', data.payload.access_token)
+        localStorage.setItem('ACCESS_TOKEN', data.payload.access_token)
 
         return {
           success: true,
