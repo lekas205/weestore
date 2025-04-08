@@ -12,6 +12,7 @@ export default [
     meta: {
       title: ROUTES.home.title,
       layout: 'private',
+      requiresAuth: true,
     },
   },
 
@@ -22,6 +23,7 @@ export default [
     meta: {
       title: ROUTES.products.title,
       layout: 'private',
+      requiresAuth: true,
     },
   },
   {
@@ -31,6 +33,7 @@ export default [
     meta: {
       title: ROUTES.payment_history.title,
       layout: 'private',
+      requiresAuth: true,
     },
   },
   {
@@ -40,6 +43,7 @@ export default [
     meta: {
       title: ROUTES.wallet.title,
       layout: 'private',
+      requiresAuth: true,
     },
   },
   {
@@ -49,6 +53,7 @@ export default [
     meta: {
       title: ROUTES.profile.title,
       layout: 'private',
+      requiresAuth: true,
     },
   },
   {
@@ -58,6 +63,7 @@ export default [
     meta: {
       title: ROUTES.groceries.title,
       layout: 'private',
+      requiresAuth: true,
     },
   },
 ]
