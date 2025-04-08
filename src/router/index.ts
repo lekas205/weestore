@@ -4,7 +4,7 @@ import appRoutes from './routes/route_modules/app'
 import { ROUTES } from './routes/routes'
 // import  * as ROUTES={} from "./routes/routes";
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes: [...appRoutes, ...authRoutes],
 })
 
