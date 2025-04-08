@@ -44,7 +44,7 @@ const loading = ref(false)
 
 const submit = async () => {
   loading.value = true
-  const res = await authStore.changeNumber(form)
+  const res = await authStore.changeNumber(form.value)
 
   if (res) {
     toast.success('Phone number has been updated', {

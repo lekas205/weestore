@@ -10,8 +10,10 @@ import type {
   resetPinDTO,
   verifyAccountDTO,
   resendOtpDTO,
+  ChangePhoneNumberDTO,
+  resendPhoneOtpDTO,
 } from '../types/dto'
-import type { APIResponse, APIResponsePayload } from '../types'
+import type { APIResponse } from '../types'
 
 import { useUserStore } from './user'
 
@@ -110,7 +112,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function changeNumber(payload): Promise<APIResponse | void> {
+  async function changeNumber(payload: ChangePhoneNumberDTO): Promise<APIResponse | void> {
     try {
       const { status, data } = await API.auth.changeNumber(payload)
       if (status === 200 || status === 201) {
@@ -173,7 +175,7 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
-  async function resendPhoneOtp(payload): Promise<APIResponse | void> {
+  async function resendPhoneOtp(payload: resendPhoneOtpDTO): Promise<APIResponse | void> {
     try {
       const { status, data } = await API.auth.resendPhoneOtp(payload)
       if (status === 200 || status === 201) {

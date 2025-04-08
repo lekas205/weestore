@@ -35,7 +35,18 @@ export type resendOtpDTO = {
   purpose: string
 }
 
+export type resendPinOtpDTO = {
+  new_phone_no: string
+  purpose: string
+}
+
 export type resendPhoneOtpDTO = {
+  auth_id: string
+  new_phone_no: string
+}
+
+export type ChangePhoneNumberDTO = {
+  otp: string
   auth_id: string
   new_phone_no: string
 }

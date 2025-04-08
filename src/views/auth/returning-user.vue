@@ -59,10 +59,10 @@ const loading = ref(false)
 
 const submit = async () => {
   loading.value = true
-  const res = await authStore.initiateLogin({})
+  // const res = await authStore.initiateLogin({})
 
-  if (res) {
-  }
+  // if (res) {
+  // }
   loading.value = false
 }
 </script>

@@ -10,6 +10,11 @@ export type APIResponsePayload = {
   status?: number
 }
 
+export type BankList = {
+  code: string
+  name: string
+}
+
 export type userProfile = {
   id: number
   fullname: string

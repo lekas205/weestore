@@ -2,12 +2,11 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { API } from '../services'
 import { AxiosError } from 'axios'
-import type { APIResponse } from '../types'
-import type { userProfile } from '../types'
+import type { userProfile, BankList, APIResponse } from '../types'
 import type { changePinDTO, changeAddressDTO, bankAccountDTO } from '../types/dto'
 
 export const useUserStore = defineStore('user', () => {
-  const banks = ref([])
+  const banks = ref<BankList[]>([])
   const profile = ref<userProfile>()
 
   async function getProfile(): Promise<APIResponse | void> {
