@@ -47,7 +47,7 @@
           </v-col>
           <v-col cols="12">
             <v-select
-              label="State"
+              label="Store"
               hide-details="auto"
               item-title="name"
               item-value="id"
@@ -89,7 +89,7 @@
               :items="referralOptions"
             ></v-select>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" v-if="form.referral === 'referral'">
             <v-text-field
               hide-details="auto"
               label="Referral Code"
@@ -163,6 +163,7 @@ const referralOptions = ref([
   { value: 'x', name: 'X (Formerly Twitter)' },
   { value: 'instagram', name: 'Instagram' },
   { value: 'whatsapp', name: 'WhatsApp' },
+  { value: 'referral', name: 'Referral' },
 ])
 
 watch(

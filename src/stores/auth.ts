@@ -14,8 +14,8 @@ import type {
   resendPhoneOtpDTO,
 } from '../types/dto'
 import type { APIResponse } from '../types'
-
 import { useUserStore } from './user'
+import { handleStoreRequestError } from '@/utils/errorHandler'
 
 const userStore = useUserStore()
 export const useAuthStore = defineStore('auth', () => {
@@ -40,7 +40,12 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       const _error = error as AxiosError
       console.log(_error)
+      handleStoreRequestError(_error)
     }
+  }
+
+  const removeSavedAuthToken = () => {
+    localStorage.removeItem('ACCESS_TOKEN')
   }
 
   async function initiateSignup(payload: registerDTO): Promise<APIResponse | void> {
@@ -57,7 +62,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -74,7 +79,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -91,7 +96,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -108,7 +113,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -124,7 +129,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -140,7 +145,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -156,7 +161,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -171,7 +176,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -187,7 +192,7 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -205,5 +210,6 @@ export const useAuthStore = defineStore('auth', () => {
     initiateSignup,
     verifyAccount,
     forgotPassword,
+    removeSavedAuthToken,
   }
 })
