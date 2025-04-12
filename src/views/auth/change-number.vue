@@ -8,23 +8,34 @@
         label="Enter Mobile Number"
         type="tel"
         hide-details="auto"
+        maxLength="11"
         v-model="form.new_phone_no"
       ></v-text-field>
-      <v-otp-input :model-value="form.otp" variant="filled" class="tw-mt-5"></v-otp-input>
+      <v-otp-input
+        v-model="form.otp"
+        v-if="show_otp"
+        variant="filled"
+        class="tw-mt-5"
+      ></v-otp-input>
 
-      <p class="tw-text-[14px]">Didn’t receive any code?</p>
+      <p class="tw-text-[14px] mt-5">Didn’t receive any code?</p>
 
       <p @click="resendOtp" class="tw-text-primary tw-text-[20px] tw-block tw-mt-3">Resend Code</p>
     </section>
 
-    <v-btn class="tw-mt-auto !tw-h-[70px] !tw-rounded-full" color="primary" @click="submit">
-      Change Number</v-btn
+    <v-btn
+      class="tw-mt-auto !tw-h-[70px] !tw-rounded-full"
+      color="primary"
+      :loading="loading"
+      @click="show_otp ? submit() : resendOtp()"
     >
+      {{ show_otp ? ' Change Number' : 'Send OTP' }}
+    </v-btn>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 // import { useRouter } from 'vue-router'
 // import { ROUTES } from '@/router/routes/routes'
@@ -41,6 +52,9 @@ const form = ref({
 })
 
 const loading = ref(false)
+const show_otp = ref(false)
+
+const user_auth_id = computed(() => localStorage.getItem('USER_ID') || '')
 
 const submit = async () => {
   loading.value = true
@@ -57,11 +71,9 @@ const submit = async () => {
 
 const resendOtp = async () => {
   loading.value = true
-  const user_phone_number = localStorage.getItem('USER_PHONE_NUMBER') || ''
-  const user_auth_id = localStorage.getItem('USER_AUTH_ID') || ''
   const res = await authStore.resendPhoneOtp({
-    new_phone_no: user_phone_number,
-    auth_id: user_auth_id,
+    new_phone_no: form.value.new_phone_no,
+    auth_id: user_auth_id.value,
   })
 
   if (res) {
@@ -69,7 +81,18 @@ const resendOtp = async () => {
       position: 'top-right',
       duration: 6000,
     })
+    show_otp.value = true
+    localStorage.setItem('CHANGE_PHONE', form.value.new_phone_no)
   }
   loading.value = false
 }
+
+onMounted(() => {
+  form.value.auth_id = user_auth_id.value
+
+  if (localStorage.getItem('CHANGE_PHONE')) {
+    show_otp.value = true
+    form.value.new_phone_no = localStorage.getItem('CHANGE_PHONE') || ''
+  }
+})
 </script>

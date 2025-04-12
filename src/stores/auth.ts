@@ -39,7 +39,6 @@ export const useAuthStore = defineStore('auth', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
       handleStoreRequestError(_error)
     }
   }
@@ -53,8 +52,8 @@ export const useAuthStore = defineStore('auth', () => {
       const { status, data } = await API.auth.registerUser(payload)
 
       if (status === 200 || status === 201) {
-        localStorage.setItem(' USER_ID', data.payload.username)
-        localStorage.setItem(' USER_PHONE_NUMBER', payload.phoneNo)
+        localStorage.setItem('USER_ID', data.payload.username)
+        localStorage.setItem('USER_PHONE_NUMBER', payload.phoneNo)
         return {
           success: true,
           payload: data.payload,
@@ -70,11 +69,10 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.getStates()
       if (status === 200 || status === 201) {
-        console.log(data.payload)
         states.value = data.payload
         return {
           success: true,
-          payload: [],
+          payload: data.payload,
         }
       }
     } catch (error) {
@@ -87,11 +85,10 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.getStores(id)
       if (status === 200 || status === 201) {
-        console.log(data.payload)
         stores.value = data.payload
         return {
           success: true,
-          payload: [],
+          payload: data.payload,
         }
       }
     } catch (error) {
@@ -121,10 +118,9 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.changeNumber(payload)
       if (status === 200 || status === 201) {
-        console.log(data.payload)
         return {
           success: true,
-          payload: [],
+          payload: data.payload,
         }
       }
     } catch (error) {
@@ -137,10 +133,9 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.resendOtp(payload)
       if (status === 200 || status === 201) {
-        console.log(data.payload)
         return {
           success: true,
-          payload: [],
+          payload: data.payload,
         }
       }
     } catch (error) {
@@ -153,10 +148,9 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.setNewPin(payload)
       if (status === 200 || status === 201) {
-        console.log(data.payload)
         return {
           success: true,
-          payload: [],
+          payload: data.payload,
         }
       }
     } catch (error) {
@@ -184,10 +178,9 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const { status, data } = await API.auth.resendPhoneOtp(payload)
       if (status === 200 || status === 201) {
-        console.log(data.payload)
         return {
           success: true,
-          payload: [],
+          payload: data.payload,
         }
       }
     } catch (error) {

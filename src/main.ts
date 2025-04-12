@@ -9,6 +9,7 @@ import router from './router'
 // Vuetify
 import 'vuetify/styles'
 import vuetify from './plugins/vuetify.ts'
+import '@mdi/font/css/materialdesignicons.css'
 
 import 'swiper/css'
 import 'swiper/css/pagination'

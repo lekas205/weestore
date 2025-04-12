@@ -4,6 +4,7 @@ import { API } from '../services'
 import { AxiosError } from 'axios'
 import type { userProfile, BankList, APIResponse } from '../types'
 import type { changePinDTO, changeAddressDTO, bankAccountDTO } from '../types/dto'
+import { handleStoreRequestError } from '@/utils/errorHandler'
 
 export const useUserStore = defineStore('user', () => {
   const banks = ref<BankList[]>([])
@@ -21,7 +22,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -37,7 +38,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -53,7 +54,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -69,7 +70,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -84,7 +85,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 
@@ -99,7 +100,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
   async function updateBankDetails(payload: bankAccountDTO): Promise<APIResponse | void> {
@@ -113,7 +114,7 @@ export const useUserStore = defineStore('user', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 

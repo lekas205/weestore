@@ -1,6 +1,6 @@
 <template>
   <div class="tw-h-full">
-    <v-form class="tw-gap-10 tw-h-full tw-pt-[50px]">
+    <v-form class="tw-gap-10 tw-h-full tw-pt-[50px]" @submit.prevent="register">
       <v-container>
         <v-row>
           <v-col cols="12">
@@ -24,6 +24,7 @@
               hide-details="auto"
               label="Email address"
               type="email"
+              required
               v-model="form.email"
             ></v-text-field>
           </v-col>
@@ -36,30 +37,33 @@
             ></v-text-field>
           </v-col>
           <v-col cols="12">
-            <v-select
+            <v-combobox
               label="State"
               hide-details="auto"
               item-title="name"
               item-value="code"
               v-model="form.state"
               :items="states"
-            ></v-select>
+              :return-object="false"
+            ></v-combobox>
           </v-col>
           <v-col cols="12">
-            <v-select
+            <v-combobox
               label="Store"
               hide-details="auto"
               item-title="name"
               item-value="id"
               v-model="form.store"
               :items="stores"
-            ></v-select>
+              :return-object="false"
+            ></v-combobox>
           </v-col>
           <v-col cols="12">
             <v-text-field
               hide-details="auto"
               label="Phone number"
               type="tel"
+              maxlength="11"
               v-model="form.phoneNo"
             ></v-text-field>
           </v-col>
@@ -67,16 +71,22 @@
             <v-text-field
               hide-details="auto"
               label="Pin"
-              type="password"
               v-model="form.pin"
+              maxLength="6"
+              :type="showPin ? 'text' : 'password'"
+              @click:append-inner="showPin = !showPin"
+              :append-inner-icon="!showPin ? 'mdi-eye' : 'mdi-eye-off'"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
             <v-text-field
               hide-details="auto"
               label="Confirm PIN"
-              type="password"
+              :type="showConfirmPin ? 'text' : 'password'"
               v-model="form.confirmPin"
+              maxLength="6"
+              @click:append-inner="showConfirmPin = !showConfirmPin"
+              :append-inner-icon="!showConfirmPin ? 'mdi-eye' : 'mdi-eye-off'"
             ></v-text-field>
           </v-col>
           <v-col cols="12">
@@ -94,14 +104,15 @@
               hide-details="auto"
               label="Referral Code"
               type="text"
+              maxlength="11"
               v-model="form.referralCode"
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-col cols="12" class="flex items-center">
+        <v-col cols="12" class="tw-flex tw-items-center">
           <v-checkbox
             hide-details="auto"
-            color="#FA4A0C"
+            color="primary"
             :value="true"
             v-model="terms"
           ></v-checkbox>
@@ -113,15 +124,12 @@
 
         <v-btn
           class="!tw-h-[70px] !tw-rounded-full"
-          color="#FA4A0C"
+          color="primary"
           block
-          @click="register"
           :loading="loading"
+          type="submit"
         >
           Signup</v-btn
-        >
-        <RouterLink to="/" class="tw-block tw-my-4 tw-text-center tw-text-primary"
-          >PIN Reset</RouterLink
         >
       </v-container>
     </v-form>
@@ -144,6 +152,8 @@ const { states, stores } = storeToRefs(authStore)
 
 const terms = ref(false)
 const loading = ref(false)
+const showPin = ref(false)
+const showConfirmPin = ref(false)
 const form = ref<registerDTO>({
   state: '',
   firstName: '',

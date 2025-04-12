@@ -13,9 +13,15 @@
         <v-text-field
           hide-details="auto"
           label="Pin"
-          type="password"
           v-model="form.password"
+          v-show-password
+          :type="showPin ? 'text' : 'password'"
+          @click:append-inner="showPin = !showPin"
+          :append-inner-icon="!showPin ? 'mdi-eye' : 'mdi-eye-off'"
         ></v-text-field>
+        <RouterLink :to="ROUTES.reset_pin.path" class="tw-block tw-my-4 tw-text-primary"
+          >PIN Reset</RouterLink
+        >
       </div>
 
       <v-btn
@@ -45,6 +51,8 @@ const form = ref({
   username: '',
   password: '',
 })
+
+const showPin = ref(false)
 
 const loading = ref(false)
 const login = async () => {

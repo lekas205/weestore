@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { API } from '../services'
 import { AxiosError } from 'axios'
 import type { APIResponse } from '../types'
+import { handleStoreRequestError } from '@/utils/errorHandler'
 
 export const useProductsStore = defineStore('products', () => {
   const products = ref<object>({})
@@ -19,7 +20,7 @@ export const useProductsStore = defineStore('products', () => {
       }
     } catch (error) {
       const _error = error as AxiosError
-      console.log(_error)
+      handleStoreRequestError(_error)
     }
   }
 

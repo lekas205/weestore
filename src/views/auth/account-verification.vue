@@ -8,7 +8,9 @@
 
       <p class="text-[14px]">
         Not my phone number?
-        <RouterLink to="/" class="tw-underline">Change Phone Number</RouterLink>
+        <RouterLink :to="ROUTES.change_number.path" class="tw-underline"
+          >Change Phone Number</RouterLink
+        >
       </p>
 
       <p class="tw-text-primary tw-text-[20px] tw-mt-4 tw-block" @click="resendOtp">>Resend Code</p>
@@ -61,9 +63,8 @@ const verify = async () => {
 
 const resendOtp = async () => {
   loading.value = true
-  const user_phone_number = localStorage.getItem('USER_PHONE_NUMBER') || ''
   const res = await authStore.resendOtp({
-    username: user_phone_number,
+    username: phone_number.value,
     purpose: 'ACCOUNT_VERIFICATION',
   })
 
@@ -75,15 +76,13 @@ const resendOtp = async () => {
   loading.value = false
 }
 
-const phone_number = computed<string>(
-  () => localStorage.getItem('USER_PHONE_NUMBER') || '0907774738343',
-)
+const phone_number = computed<string>(() => localStorage.getItem('USER_PHONE_NUMBER') || '')
 
 const encrypted_phone_number = computed(
   () => phone_number.value.slice(0, 3) + phone_number.value.slice(-4).padStart(10, '*'),
 )
 
 onMounted(() => {
-  form.value.auth_id = localStorage.getItem('AUTH_ID') || ''
+  form.value.auth_id = localStorage.getItem('USER_ID') || ''
 })
 </script>
