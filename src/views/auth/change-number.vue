@@ -1,7 +1,7 @@
 <template>
   <div class="tw-relative tw-mt-[-40px] tw-z-10 tw-h-full tw-flex tw-flex-col">
     <h3 class="tw-text-white tw-text-center tw-text-[16px]">Change Mobile Number</h3>
-    <section class="tw-text-center tw-mt-[70px]">
+    <section class="tw-text-center tw-mt-[70px] tw-mb-5">
       <p class="tw-text-[20px] tw-mb-4">Please enter mobile number to receive the 6-Digits Otp</p>
 
       <v-text-field
@@ -20,7 +20,7 @@
 
       <p class="tw-text-[14px] mt-5">Didn’t receive any code?</p>
 
-      <p @click="resendOtp" class="tw-text-primary tw-text-[20px] tw-block tw-mt-3">Resend Code</p>
+      <p @click="resendOtp" class="tw-text-primary tw-text-[16px] tw-block tw-mt-3">Resend Code</p>
     </section>
 
     <v-btn
