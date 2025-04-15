@@ -17,8 +17,8 @@ import type { APIResponse } from '../types'
 import { useUserStore } from './user'
 import { handleStoreRequestError } from '@/utils/errorHandler'
 
-const userStore = useUserStore()
 export const useAuthStore = defineStore('auth', () => {
+  const userStore = useUserStore()
   const count = ref(0)
   const states = ref<string[]>([])
   const stores = ref<string[]>([])

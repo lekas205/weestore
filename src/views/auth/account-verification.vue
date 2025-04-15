@@ -64,18 +64,20 @@ const verify = async () => {
 const resendOtp = async () => {
   loading.value = true
   const res = await authStore.resendOtp({
-    username: phone_number.value,
+    username: username.value,
     purpose: 'ACCOUNT_VERIFICATION',
   })
 
   if (res) {
-    router.push({
-      name: ROUTES.home.name,
+    toast.success(res.payload.message, {
+      position: 'top-right',
+      duration: 6000,
     })
   }
   loading.value = false
 }
 
+const username = computed<string>(() => localStorage.getItem('USER_ID') || '')
 const phone_number = computed<string>(() => localStorage.getItem('USER_PHONE_NUMBER') || '')
 
 const encrypted_phone_number = computed(
