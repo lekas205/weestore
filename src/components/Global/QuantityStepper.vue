@@ -11,6 +11,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 const count = ref(1)
+
+const emits = defineEmits<{
+  (e: 'update:modelValue', val: number): void
+}>()
+
+watch(
+  () => count.value,
+  (newCount: number) => {
+    if (newCount) {
+      emits('update:modelValue', newCount)
+    }
+  },
+)
 </script>

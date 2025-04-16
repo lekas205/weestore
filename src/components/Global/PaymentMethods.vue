@@ -4,7 +4,7 @@
 
     <section class="tw-p-6 tw-bg-white tw-shadow-md tw-rounded-xl">
       <v-container fluid>
-        <v-radio-group v-model="radios">
+        <v-radio-group v-model="method">
           <v-radio
             :value="option.value"
             color="red"
@@ -27,13 +27,14 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import BankPayment from '../Modals/BankPayment.vue'
-const radios = ref('Duckduckgo')
+
+const method = defineModel()
 
 const showBankPayment = ref(false)
 const paymentOptions = ref([
-  { icon: '', label: 'Pay With Paystack', value: 'paystack' },
-  { icon: '', label: 'Pay With Bank', value: 'bank' },
-  { icon: '', label: 'Pocket', value: 'pocket' },
+  { icon: '', label: 'Pay With Paystack', value: 'PAYSTACK' },
+  { icon: '', label: 'Pay With Bank', value: 'BANK' },
+  { icon: '', label: 'Pocket', value: 'POCKET' },
 ])
 
 const handlePaymentMethod = (value: string) => {

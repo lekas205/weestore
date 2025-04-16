@@ -15,6 +15,38 @@ export type BankList = {
   name: string
 }
 
+export type Categories = {
+  icon: string
+  id: string
+  name: string
+  productCount: number
+}
+
+export type Products = {
+  category: string
+  category_id: string
+  description: string
+  images: any
+  interest_percent: number
+  is_available: boolean
+  manufacturer: string
+  max_quantity: number
+  min_quantity: number
+  price: number
+  product_id: string
+  product_name: string
+  published: boolean
+  quantity_bought: number
+  sizes: string[]
+  state_id: string
+  state_name: string
+  status: string
+  stock_quantity: number
+  warehouse_id: string
+  warehouse_name: string
+  whp: number
+}
+
 export type userProfile = {
   id: number
   fullname: string

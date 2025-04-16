@@ -45,6 +45,11 @@ export type resendPhoneOtpDTO = {
   new_phone_no: string
 }
 
+export type cartDTO = {
+  quantity: string
+  productId: string
+}
+
 export type ChangePhoneNumberDTO = {
   otp: string
   auth_id: string

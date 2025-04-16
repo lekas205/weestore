@@ -1,6 +1,9 @@
 const customer = '/customer'
 const bank = '/bank-account'
 
+export const CART = `${customer}/cart`
+export const ORDER = `${customer}/order`
+
 export const LOGIN = `${customer}/login`
 export const REGISTER = `${customer}/register`
 export const VERIFY_ACCOUNT = `${customer}/verify-account/`
@@ -13,6 +16,7 @@ export const CHANGE_PIN = `${customer}/password`
 export const RESEND_OTP = `${customer}/resend-otp`
 export const RESEND_PHONE_OTP = `${customer}/phone/otp`
 export const PRODUCTS = `${customer}/product`
+export const CATEGORIES = `${customer}/categories`
 export const CHANGE_ADDRESS = `${customer}/address`
 
 export const GET_ACCOUNT_DETAILS = `${bank}/lookup-account`

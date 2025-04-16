@@ -17,6 +17,8 @@ import 'swiper/css/pagination'
 import Private from './layouts/private.vue'
 import Public from './layouts/public.vue'
 
+import paystack from 'vue3-paystack'
+
 const token = localStorage.getItem('ACCESS_TOKEN')
 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
@@ -26,6 +28,8 @@ const app = createApp(App)
 
 app.component('public-pages', Public)
 app.component('private-pages', Private)
+
+app.component('paystack-modal', paystack)
 app.use(vuetify)
 
 app.use(createPinia())

@@ -9,7 +9,9 @@
     <p class="tw-text-[20px]" v-if="title">{{ title }}</p>
 
     <button @click="showCart = true">
-      <img src="@/assets/images/svgs/cart.svg" alt="car" />
+      <v-badge color="primary" :content="cartCount">
+        <img src="@/assets/images/svgs/cart.svg" alt="car" />
+      </v-badge>
     </button>
   </div>
 
@@ -18,9 +20,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import CartDrawer from './CartDrawer.vue'
 import AppMenuDrawer from './AppMenuDrawer.vue'
+
+import { useCartStore } from '@/stores/cart.ts'
+
+const cartStore = useCartStore()
+
+const { cartItems } = storeToRefs(cartStore)
+
 defineProps<{
   back?: boolean
   title?: string
@@ -32,4 +42,6 @@ const emit = defineEmits<{
 
 const showCart = ref(false)
 const showSidebar = ref(false)
+
+const cartCount = computed(() => cartItems.value.count || 0)
 </script>

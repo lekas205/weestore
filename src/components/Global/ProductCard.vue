@@ -4,7 +4,7 @@
     @click="openDetails"
   >
     <img
-      src="https://plus.unsplash.com/premium_photo-1740708549031-fd00d8821c5b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"
+      :src="product?.images.imageUrl"
       alt="Product Image"
       class="tw-rounded-full tw-object-cover tw-mt-[-100px]"
       :class="{
@@ -13,26 +13,23 @@
       }"
     />
     <div class="">
-      <p class="tw-text-[22px] mt-5 mx-auto tw-leading-7 tw-mb-2">Spagettini Fat</p>
-      <p class="tw-text-primary tw-text-[17px]">N20,700</p>
+      <p class="tw-text-[22px] mt-5 mx-auto tw-leading-7 tw-mb-2">{{ product?.product_name }}</p>
+      <p class="tw-text-primary tw-text-[17px]">{{ product?.price }}</p>
       <p class="tw-text-success tw-mt-2 tw-text-[17px]">Available</p>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-type ProductType = {
-  name: string
-  price: number
-  available: boolean
-}
+import type { Products } from '@/types'
+
 const props = defineProps<{
   size: 'large' | 'small'
-  product: ProductType | undefined
+  product: Products
 }>()
 
 const emit = defineEmits<{
-  (e: 'showProductDetails', val: ProductType | undefined): void
+  (e: 'showProductDetails', val: Products): void
 }>()
 
 const openDetails = () => {
