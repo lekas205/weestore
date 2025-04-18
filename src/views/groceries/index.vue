@@ -31,18 +31,15 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import type { Products } from '@/types'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ProductCard from '@/components/Global/ProductCard.vue'
 import ProductDetails from '@/components/Global/ProductDetails.vue'
-type ProductType = {
-  name: string
-  price: number
-  available: boolean
-}
-const showDetails = ref(false)
-const productDetails = ref<ProductType>()
 
-const showProductDetails = (product: ProductType | undefined) => {
+const showDetails = ref(false)
+const productDetails = ref<Products>({} as Products)
+
+const showProductDetails = (product: Products) => {
   productDetails.value = product
   showDetails.value = true
 }

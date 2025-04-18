@@ -33,6 +33,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
+import type { Products } from '@/types'
 import { formatAsMoney } from '@/utils/helpers.ts'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ProductItem from '@/components/Global/ProductItem.vue'
@@ -41,15 +42,11 @@ import { useProductsStore } from '@/stores/products.ts'
 
 const productStore = useProductsStore()
 const { orders } = storeToRefs(productStore)
-type ProductType = {
-  name: string
-  price: number
-  available: boolean
-}
-const showDetails = ref(false)
-const productDetails = ref<ProductType>()
 
-const showProductDetails = (product: ProductType) => {
+const showDetails = ref(false)
+const productDetails = ref<Products>({} as Products)
+
+const showProductDetails = (product: Products) => {
   productDetails.value = product
   showDetails.value = true
 }
