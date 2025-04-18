@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import { ROUTES } from '../routes'
 import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
