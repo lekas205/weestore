@@ -11,11 +11,11 @@
           <p>+2348128392001</p>
         </section>
 
-        <div class="text-center pb-4">
+        <!-- <div class="text-center pb-4">
           <v-btn class="tw-mt-3 tw-w-[80%] !tw-h-[50px] !tw-rounded-full" color="#FA4A0C">
             Track My Order
           </v-btn>
-        </div>
+        </div> -->
       </v-card>
     </v-dialog>
   </div>

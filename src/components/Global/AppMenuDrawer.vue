@@ -7,7 +7,7 @@
       color="primary"
       class="tw-relative"
     >
-      <section class="tw-py-10 tw-px-7 tw-h-full">
+      <section class="tw-py-10 tw-px-7 tw-h-full tw-overflow-hidden">
         <button class="tw-absolute tw-top-6 tw-z-3 tw-right-5" @click="showDrawer = false">
           <img src="@/assets/images/svgs/close-light.svg" width="20px" alt="" />
         </button>

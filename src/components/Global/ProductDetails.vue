@@ -60,7 +60,7 @@
           </div>
         </section>
 
-        <section class="tw-flex tw-flex-col tw-gap-4">
+        <!-- <section class="tw-flex tw-flex-col tw-gap-4">
           <div class="tw-flex tw-justify-between tw-w-full">
             <p class="tw-text-[18px]">Purchase Amount</p>
             <p class="tw-text-[18px]">N21,700</p>
@@ -75,9 +75,9 @@
             <p class="tw-text-[18px]">WHP</p>
             <p class="tw-text-[18px]">5</p>
           </div>
-        </section>
+        </section> -->
 
-        <section class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6">
+        <!-- <section class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6">
           <v-btn
             @click="showPocketModal = true"
             class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
@@ -95,7 +95,7 @@
             Withdraw To Bank. <br />
             Balance - N21,700
           </v-btn>
-        </section>
+        </section> -->
       </section>
     </v-navigation-drawer>
   </v-layout>

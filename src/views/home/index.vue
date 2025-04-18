@@ -26,9 +26,12 @@
       <template v-for="(category, index) in categories" :key="index">
         <v-tab-item v-if="tab === category.id">
           <swiper
-            :loop="true"
             :slidesPerView="2"
             :spaceBetween="70"
+            :autoplay="{
+              delay: 2500,
+              disableOnInteraction: false,
+            }"
             :pagination="{
               clickable: true,
             }"
@@ -84,6 +87,8 @@ onMounted(async () => {
     await productStore.fetchProducts({
       categoryId: categories.value[0].id,
     })
+
+    tab.value = categories.value[0].id
   }
 })
 </script>

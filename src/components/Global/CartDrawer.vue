@@ -156,8 +156,9 @@ const createOrder = async () => {
   loading.value = false
 }
 
-const onSuccessfulPayment = (event) => {
-  console.log(event)
+const onSuccessfulPayment = () => {
+  cartStore.fetchCartItems()
+  showDrawer.value = false
   showOrderSuccess.value = true
 }
 
