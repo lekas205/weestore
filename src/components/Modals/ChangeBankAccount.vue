@@ -103,7 +103,7 @@ const submit = async () => {
     toast.success(
       profile.value?.bank ? 'Bank account updated successfully' : 'Bank account added successfully',
       {
-        position: 'top-right',
+        position: 'top',
         duration: 6000,
       },
     )

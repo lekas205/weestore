@@ -24,7 +24,7 @@ async function verifyAccount({ auth_id, otp }: verifyAccountDTO) {
 }
 
 async function changeNumber(payload: any) {
-  return await http.post<APIResponse>(ENDPOINTS.CHANGE_NUMBER, payload)
+  return await http.patch<APIResponse>(ENDPOINTS.CHANGE_NUMBER, payload)
 }
 
 async function setNewPin(payload: resetPinDTO) {

@@ -61,7 +61,7 @@ const login = async () => {
 
   if (res) {
     toast.success('Login successful', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     router.push({

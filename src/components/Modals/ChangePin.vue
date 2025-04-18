@@ -77,7 +77,7 @@ const submit = async () => {
   const res = await userStore.changePin(form.value)
   if (res) {
     toast.success('Pin changed successfully', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     emit('update:show', false)

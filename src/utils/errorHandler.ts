@@ -21,7 +21,7 @@ export function handleStoreRequestError(error: any): any {
       authStore.removeSavedAuthToken()
       if (!isLoginPage) {
         toast.error('You are not logged in', {
-          position: 'top-right',
+          position: 'top',
           duration: 6000,
         })
         router.push({ name: 'Login' })
@@ -33,7 +33,7 @@ export function handleStoreRequestError(error: any): any {
   }
 
   toast.error(message, {
-    position: 'top-right',
+    position: 'top',
     duration: 6000,
   })
 

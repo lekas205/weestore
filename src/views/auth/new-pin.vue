@@ -49,7 +49,7 @@ const submit = async () => {
 
   if (res) {
     toast.success('Pin was changed successfully', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     router.push({

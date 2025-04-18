@@ -7,7 +7,7 @@
       color="primary"
       class="tw-relative"
     >
-      <section class="tw-py-10 tw-px-7 tw-h-full tw-overflow-hidden">
+      <section class="tw-py-10 tw-px-7 tw-h-full tw-w-full tw-relative tw-overflow-hidden">
         <button class="tw-absolute tw-top-6 tw-z-3 tw-right-5" @click="showDrawer = false">
           <img src="@/assets/images/svgs/close-light.svg" width="20px" alt="" />
         </button>
@@ -66,7 +66,9 @@
             </li>
           </ul>
 
-          <button class="tw-text-[20px] tw-font-bold tw-self-start">Sign-out</button>
+          <button class="tw-text-[20px] tw-font-bold tw-self-start" @click="logout">
+            Sign-out
+          </button>
         </section>
       </section>
     </v-navigation-drawer>
@@ -75,6 +77,9 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps<{
   show: boolean
@@ -92,4 +97,11 @@ const showDrawer = computed({
     emit('update:show', value)
   },
 })
+
+const logout = () => {
+  // Implement logout logic here
+  localStorage.clear()
+
+  router.push('/login')
+}
 </script>

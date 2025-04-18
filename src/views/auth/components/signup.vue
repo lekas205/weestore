@@ -189,7 +189,7 @@ const register = async () => {
   const res = await authStore.initiateSignup(form.value)
   if (res) {
     toast.success('registration successful', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
 

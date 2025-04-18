@@ -35,12 +35,14 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { computed, onMounted, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 // import { useRouter } from 'vue-router'
 // import { ROUTES } from '@/router/routes/routes'
 import { useToast } from 'vue-toast-notification'
 
+const router = useRouter()
 const toast = useToast()
 // const router = useRouter()
 const authStore = useAuthStore()
@@ -62,8 +64,12 @@ const submit = async () => {
 
   if (res) {
     toast.success('Phone number has been updated', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
+    })
+
+    router.push({
+      name: ROUTES.home.name,
     })
   }
   loading.value = false
@@ -78,7 +84,7 @@ const resendOtp = async () => {
 
   if (res) {
     toast.success('OTP has ben sent', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     show_otp.value = true

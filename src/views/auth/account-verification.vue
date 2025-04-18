@@ -51,12 +51,14 @@ const verify = async () => {
 
   if (res) {
     toast.success('Account verification completed', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     router.push({
       name: ROUTES.home.name,
     })
+
+    localStorage.removeItem('CHANGE_PHONE')
   }
   loading.value = false
 }
@@ -70,7 +72,7 @@ const resendOtp = async () => {
 
   if (res) {
     toast.success(res.payload.message, {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
   }

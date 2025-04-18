@@ -64,7 +64,7 @@ const submit = async () => {
   const res = await userStore.changeAddress(form.value)
   if (res) {
     toast.success('Address was changed successfully', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     emit('update:show', false)

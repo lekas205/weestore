@@ -43,7 +43,7 @@ const submit = async () => {
 
   if (res) {
     toast.success('A reset OTP has been sent', {
-      position: 'top-right',
+      position: 'top',
       duration: 6000,
     })
     localStorage.setItem('USER_PHONE_NUMBER', form.value.username)
