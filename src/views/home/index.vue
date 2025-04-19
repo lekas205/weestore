@@ -57,7 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { Products } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -80,6 +80,14 @@ const showProductDetails = (product: Products) => {
   productDetails.value = product
   showDetails.value = true
 }
+
+watch(tab, async (newTab, oldTab) => {
+  if (newTab && oldTab !== '') {
+    await productStore.fetchProducts({
+      categoryId: newTab,
+    })
+  }
+})
 
 onMounted(async () => {
   if (!categories.value.length) {
