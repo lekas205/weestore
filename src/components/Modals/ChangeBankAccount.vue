@@ -89,7 +89,7 @@ const submit = async () => {
     bankName: banks.value.find((bank) => bank.code === form.value.bankCode)?.name,
     accountName: accountName.value,
   }
-  if (!profile.value?.bank) {
+  if (!profile.value?.bank?.accountNumber) {
     res = await userStore.addBankDetails({
       ...payload,
     })
