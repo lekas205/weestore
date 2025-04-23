@@ -26,3 +26,7 @@ body {
 .swiper-pagination-bullet-active {
   background: #fa4a0c !important;
 }
+
+#paystack-modal {
+  display: none;
+}

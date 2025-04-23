@@ -19,6 +19,8 @@ import { handleStoreRequestError } from '@/utils/errorHandler'
 
 export const useAuthStore = defineStore('auth', () => {
   const userStore = useUserStore()
+
+  const loader = ref(false)
   const count = ref(0)
   const states = ref<string[]>([])
   const stores = ref<string[]>([])
@@ -41,6 +43,10 @@ export const useAuthStore = defineStore('auth', () => {
       const _error = error as AxiosError
       handleStoreRequestError(_error)
     }
+  }
+
+  const toggleLoader = () => {
+    loader.value = !loader.value
   }
 
   const removeSavedAuthToken = () => {
@@ -193,7 +199,9 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     states,
     stores,
+    loader,
     doubleCount,
+    toggleLoader,
     setNewPin,
     changeNumber,
     fetchStates,

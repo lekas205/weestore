@@ -38,11 +38,16 @@
             :modules="[Pagination]"
             class="mySwiper"
           >
-            <swiper-slide class="product-slide" v-for="(product, index) in products" :key="index">
+            <swiper-slide
+              class="product-slide"
+              v-for="(product, index) in !loading ? products : 2"
+              :key="index"
+            >
               <div class="tw-h-[310px] tw-w-[182px]">
                 <ProductCard
                   size="large"
-                  :product="product"
+                  :product="!loading ? product : null"
+                  :loading="loading"
                   @show-product-details="showProductDetails"
                 />
               </div>
@@ -66,11 +71,14 @@ import ProductCard from '@/components/Global/ProductCard.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import AppBottomBar from '@/components/Global/AppBottomBar.vue'
 import { useProductsStore } from '@/stores/products.ts'
+import { useAuthStore } from '@/stores/auth'
 
+const authStore = useAuthStore()
 const productStore = useProductsStore()
 const { products, categories } = storeToRefs(productStore)
 
 const tab = ref('')
+const loading = ref(false)
 const showDetails = ref(false)
 const productDetails = ref<Products>({} as Products)
 
@@ -83,20 +91,24 @@ const showProductDetails = (product: Products) => {
 
 watch(tab, async (newTab, oldTab) => {
   if (newTab && oldTab !== '') {
+    loading.value = true
     await productStore.fetchProducts({
       categoryId: newTab,
     })
+    loading.value = false
   }
 })
 
 onMounted(async () => {
   if (!categories.value.length) {
+    authStore.toggleLoader()
     await productStore.fetchCategories()
     await productStore.fetchProducts({
       categoryId: categories.value[0].id,
     })
 
     tab.value = categories.value[0].id
+    authStore.toggleLoader()
   }
 })
 </script>

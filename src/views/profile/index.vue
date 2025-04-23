@@ -23,8 +23,18 @@
     </div>
 
     <ul class="tw-flex tw-flex-col tw-gap-4 tw-mt-8">
-      <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">
-        Referral Code - 08136018432
+      <li
+        class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px] tw-relative"
+        v-if="profile?.phone"
+        @click="copyToClipboard(profile.phone)"
+      >
+        Referral Code - {{ profile?.phone }}
+
+        <img
+          src="@/assets/images/svgs/copy.svg"
+          class="tw-absolute tw-right-5 -tw-translate-y-1/2 tw-top-1/2"
+          alt=""
+        />
       </li>
       <li
         @click="showChangePin = true"
@@ -48,7 +58,11 @@
         <img src="@/assets/images/svgs/back.svg" class="tw-rotate-180" alt="" />
       </li>
 
-      <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">Contact Us Via WhatApp</li>
+      <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">
+        <a href="https://wa.me/2348136018432" target="_blank" rel="noopener">
+          Contact Us Via WhatApp
+        </a>
+      </li>
       <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">Delete Account</li>
     </ul>
   </div>
@@ -66,7 +80,9 @@ import AppHeader from '@/components/Global/AppHeader.vue'
 import ChangeAddress from '@/components/Modals/ChangeAddress.vue'
 import ChangeBankAccount from '@/components/Modals/ChangeBankAccount.vue'
 import { useUserStore } from '@/stores/user.ts'
+import { useToast } from 'vue-toast-notification'
 
+const toast = useToast()
 const userStore = useUserStore()
 
 const { profile } = storeToRefs(userStore)
@@ -74,4 +90,21 @@ const { profile } = storeToRefs(userStore)
 const showChangePin = ref(false)
 const showChangeAddress = ref(false)
 const showBankAccount = ref(false)
+
+async function copyToClipboard(text: string) {
+  try {
+    await navigator.clipboard.writeText(text)
+    console.log('Text copied to clipboard!')
+    toast.success('Referral code copied to clipboard', {
+      position: 'top',
+      duration: 4000,
+    })
+  } catch (err) {
+    toast.error('Referral code not copied', {
+      position: 'top',
+      duration: 6000,
+    })
+    console.error('Failed to copy text: ', err)
+  }
+}
 </script>

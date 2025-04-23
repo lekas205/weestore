@@ -11,7 +11,7 @@ async function fetchCategories() {
 }
 
 async function fetchCustomerOrder() {
-  return await http.get<APIResponse>(ENDPOINTS.ORDER)
+  return await http.get<APIResponse>(ENDPOINTS.PURCHASED_PRODUCTS)
 }
 
 export default {

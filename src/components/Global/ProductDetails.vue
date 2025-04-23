@@ -32,18 +32,23 @@
             </div>
             <div class="tw-flex tw-justify-between tw-items-center">
               <p>Min. Qty</p>
-              <QuantityStepper v-model="quantity" />
+              <QuantityStepper v-model="quantity" v-if="!isPurchased" />
+              <p v-else>{{ product.quantity }}</p>
             </div>
             <div class="tw-flex tw-justify-between tw-items-center">
               <p>Total Price</p>
               <p class="tw-text-primary tw-text-[20px]">
-                {{ formatAsMoney(product?.price * quantity) }}
+                {{
+                  isPurchased
+                    ? formatAsMoney(product.total)
+                    : formatAsMoney(product?.price * quantity)
+                }}
               </p>
             </div>
           </section>
         </div>
 
-        <section>
+        <section v-if="!isPurchased">
           <section class="tw-mt-5" v-if="product?.description">
             <h4 class="tw-text-[20px]">Product Description</h4>
             <small class="tw-text-[16px] tw-opacity-50"> {{ product?.description }} </small>
@@ -60,42 +65,44 @@
           </div>
         </section>
 
-        <!-- <section class="tw-flex tw-flex-col tw-gap-4">
-          <div class="tw-flex tw-justify-between tw-w-full">
-            <p class="tw-text-[18px]">Purchase Amount</p>
-            <p class="tw-text-[18px]">N21,700</p>
-          </div>
+        <template v-else>
+          <section class="tw-flex tw-flex-col tw-gap-4 mt-5">
+            <div class="tw-flex tw-justify-between tw-w-full">
+              <p class="tw-text-[18px]">Purchase Amount</p>
+              <p class="tw-text-[18px]">{{ formatAsMoney(product.total) }}</p>
+            </div>
 
-          <div class="tw-flex tw-justify-between tw-w-full">
-            <p class="tw-text-[18px]">Procurement Date</p>
-            <p class="tw-text-[18px]">12/1/2025</p>
-          </div>
+            <div class="tw-flex tw-justify-between tw-w-full">
+              <p class="tw-text-[18px]">Procurement Date</p>
+              <p class="tw-text-[18px]">{{ product.start_date }}</p>
+            </div>
 
-          <div class="tw-flex tw-justify-between tw-w-full">
-            <p class="tw-text-[18px]">WHP</p>
-            <p class="tw-text-[18px]">5</p>
-          </div>
-        </section> -->
+            <div class="tw-flex tw-justify-between tw-w-full">
+              <p class="tw-text-[18px]">WHP</p>
+              <p class="tw-text-[18px]">{{ product.whp }}</p>
+            </div>
+          </section>
 
-        <!-- <section class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6">
-          <v-btn
-            @click="showPocketModal = true"
-            class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
-            color="#FA4A0C"
-          >
-            Transfer To Pocket for Restocking. <br />
-            Balance - N21,700
-          </v-btn>
+          <section class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6 mt-8">
+            <v-btn
+              @click="showPocketModal = true"
+              class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
+              color="#FA4A0C"
+            >
+              Transfer To Pocket for Restocking. <br />
+              Balance - {{ formatAsMoney(product?.total) }}
+            </v-btn>
 
-          <v-btn
-            @click="showWithdrawal = true"
-            class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
-            color="primary"
-          >
-            Withdraw To Bank. <br />
-            Balance - N21,700
-          </v-btn>
-        </section> -->
+            <v-btn
+              @click="showWithdrawal = true"
+              class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
+              color="#fa4b0c5b"
+            >
+              Withdraw To Bank. <br />
+              Balance - {{ formatAsMoney(product?.total) }}
+            </v-btn>
+          </section>
+        </template>
       </section>
     </v-navigation-drawer>
   </v-layout>
@@ -123,6 +130,7 @@ const cartStore = useCartStore()
 const props = defineProps<{
   show: boolean
   product: Products
+  isPurchased?: boolean
 }>()
 
 const emit = defineEmits<{

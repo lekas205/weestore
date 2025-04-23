@@ -1,5 +1,14 @@
 <template>
+  <v-skeleton-loader
+    :loading="loading"
+    v-if="loading"
+    height="200px"
+    type="image, list-item-two-line"
+  >
+  </v-skeleton-loader>
+
   <div
+    v-else
     class="tw-bg-white tw-py-8 tw-px-2 tw-w-full tw-rounded-[25px] tw-relative tw-shadow-lg tw-text-center tw-flex tw-flex-col tw-justify-center tw-items-center tw-mt-[100px]"
     @click="openDetails"
   >
@@ -25,7 +34,8 @@ import type { Products } from '@/types'
 
 const props = defineProps<{
   size: 'large' | 'small'
-  product: Products
+  product: Products | any
+  loading?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -33,6 +43,20 @@ const emit = defineEmits<{
 }>()
 
 const openDetails = () => {
+  if (!props.product) return
   emit('showProductDetails', props.product)
 }
 </script>
+
+<style scoped>
+.v-skeleton-loader {
+  margin-top: 100px;
+  border-radius: 18px;
+}
+
+:deep(.v-skeleton-loader__image) {
+  height: 170px;
+  border-radius: 50%;
+  margin-top: -80px;
+}
+</style>

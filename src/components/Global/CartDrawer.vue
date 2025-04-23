@@ -65,8 +65,22 @@
             >
           </div>
         </template>
-        <div class="tw-flex tw-justify-center tw-items-center tw-h-screen tw-w-full" v-else>
-          <h1>No Data</h1>
+        <div
+          class="tw-flex tw-flex-col tw-items-center tw-justify-center my-auto tw-h-[75vh]"
+          v-else
+        >
+          <img src="@/assets/images/svgs/cart.svg" alt="" width="215px" />
+          <h2 class="tw-text-[28px] mt-4 mb-3">No item added yet</h2>
+          <p class="tw-w-[60%] text-center mx-auto tw-text-[17px] tw-opacity-50">
+            Hit the button below to Create an order
+          </p>
+          <v-btn
+            class="!tw-h-[70px] !tw-rounded-full tw-w-full mt-4"
+            color="primary"
+            @click="placeOrder"
+          >
+            Place Order</v-btn
+          >
         </div>
       </section>
       <paystack-modal
@@ -96,8 +110,10 @@ import PaymentMethods from './PaymentMethods.vue'
 import OrderSuccess from '../Modals/OrderSuccess.vue'
 import { useCartStore } from '@/stores/cart.ts'
 import { formatAsMoney } from '@/utils/helpers.ts'
+import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toast-notification'
 
+const router = useRouter()
 const toast = useToast()
 const cartStore = useCartStore()
 
@@ -134,6 +150,11 @@ const total = computed(() => {
     return acc + item.price * item.quantity
   }, 0)
 })
+
+const placeOrder = () => {
+  showDrawer.value = false
+  router.push('/home')
+}
 
 const deleteItem = (itemId: string) => {
   cartStore.deleteICartItem(itemId)

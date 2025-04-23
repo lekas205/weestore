@@ -23,5 +23,3 @@ onMounted(() => {
     <RouterView />
   </component>
 </template>
-
-<style scoped></style>

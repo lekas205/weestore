@@ -11,6 +11,7 @@ export const CHANGE_NUMBER = `${customer}/phone-number/`
 export const RESET_PIN = `${customer}/reset-password`
 export const FORGOT_PASSWORD = `${customer}/forgot-password`
 export const PROFILE = `${customer}/profile`
+export const PURCHASED_PRODUCTS = `${customer}/purchased/product`
 
 export const CHANGE_PIN = `${customer}/password`
 export const RESEND_OTP = `${customer}/resend-otp`

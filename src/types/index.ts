@@ -27,12 +27,15 @@ export type Products = {
   category_id: string
   description: string
   images: any
+  total: number
+  start_date?: string
   interest_percent: number
   is_available: boolean
   manufacturer: string
   max_quantity: number
   min_quantity: number
   price: number
+  quantity: number
   product_id: string
   product_name: string
   published: boolean

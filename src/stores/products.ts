@@ -47,6 +47,9 @@ export const useProductsStore = defineStore('products', () => {
       const { status, data } = await API.products.fetchCustomerOrder()
       if (status === 201 || status === 200) {
         orders.value = data.payload
+
+        console.log(data.payload)
+
         return {
           success: true,
           payload: null,
