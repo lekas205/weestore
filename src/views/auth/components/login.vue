@@ -15,7 +15,8 @@
           label="Pin"
           v-model="form.password"
           v-show-password
-          :type="showPin ? 'text' : 'password'"
+          maxLength="6"
+          :type="showPin ? 'tel' : 'password'"
           @click:append-inner="showPin = !showPin"
           :append-inner-icon="!showPin ? 'mdi-eye' : 'mdi-eye-off'"
         ></v-text-field>

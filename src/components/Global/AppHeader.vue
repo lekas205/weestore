@@ -6,9 +6,9 @@
     <button @click="showSidebar = true" v-else>
       <img src="@/assets/images/svgs/hamburger.svg" alt="hamburger" />
     </button>
-    <p class="tw-text-[20px]" v-if="title">{{ title }}</p>
+    <p class="tw-text-[20px] tw-mx-auto" v-if="title">{{ title }}</p>
 
-    <button @click="showCart = true">
+    <button @click="showCart = true" v-if="!hideCartIcon">
       <v-badge color="primary" :content="cartCount">
         <img src="@/assets/images/svgs/cart.svg" alt="car" />
       </v-badge>
@@ -34,6 +34,7 @@ const { cartItems } = storeToRefs(cartStore)
 defineProps<{
   back?: boolean
   title?: string
+  hideCartIcon?: boolean
 }>()
 
 const emit = defineEmits<{

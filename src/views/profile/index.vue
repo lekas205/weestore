@@ -58,9 +58,18 @@
         <img src="@/assets/images/svgs/back.svg" class="tw-rotate-180" alt="" />
       </li>
 
-      <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">
-        <a href="https://wa.me/2348136018432" target="_blank" rel="noopener">
+      <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px] tw-relative">
+        <a
+          href="https://wa.me/2348136018432"
+          target="_blank"
+          rel="noopener"
+          class="tw-w-full tw-block"
+        >
           Contact Us Via WhatApp
+
+          <span class="tw-absolute tw-right-5 -tw-translate-y-1/2 tw-top-1/2">
+            <v-icon icon="mdi-whatsapp" end></v-icon>
+          </span>
         </a>
       </li>
       <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">Delete Account</li>

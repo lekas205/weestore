@@ -22,7 +22,7 @@ export const CHANGE_ADDRESS = `${customer}/address`
 
 export const GET_ACCOUNT_DETAILS = `${bank}/lookup-account`
 export const BANK_LIST = `${bank}/supported-banks`
-export const ADD_BANK_ACCOUNT = `/${customer}/add-bank-account`
+export const ADD_BANK_ACCOUNT = `${customer}/add-bank-account`
 export const UPDATE_BANK_ACCOUNT = `${customer}/update-bank-account`
 
 export const STATE = `utility/states`

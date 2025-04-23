@@ -13,7 +13,7 @@
     @click="openDetails"
   >
     <img
-      :src="product?.images.imageUrl"
+      :src="productImage"
       alt="Product Image"
       class="tw-rounded-full tw-object-cover tw-mt-[-100px]"
       :class="{
@@ -23,7 +23,7 @@
     />
     <div class="">
       <p class="tw-text-[22px] mt-5 mx-auto tw-leading-7 tw-mb-2">{{ product?.product_name }}</p>
-      <p class="tw-text-primary tw-text-[17px]">{{ product?.price }}</p>
+      <p class="tw-text-primary tw-text-[17px]">{{ formatAsMoney(product.price) }}</p>
       <p class="tw-text-success tw-mt-2 tw-text-[17px]">Available</p>
     </div>
   </div>
@@ -31,6 +31,8 @@
 
 <script setup lang="ts">
 import type { Products } from '@/types'
+import { formatAsMoney } from '@/utils/helpers.ts'
+import { computed } from 'vue'
 
 const props = defineProps<{
   size: 'large' | 'small'
@@ -46,6 +48,8 @@ const openDetails = () => {
   if (!props.product) return
   emit('showProductDetails', props.product)
 }
+
+const productImage = computed(() => props.product.images.find((i: any) => i.isPrimary)?.imageUrl)
 </script>
 
 <style scoped>

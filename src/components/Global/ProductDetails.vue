@@ -2,7 +2,7 @@
   <v-layout>
     <v-navigation-drawer v-model="showDrawer" temporary :width="450" color="#F4F4F8">
       <section class="tw-p-5 tw-flex tw-flex-col">
-        <AppHeader back @go-back="showDrawer = false" />
+        <AppHeader back @go-back="showDrawer = false" title="Product Details" hideCartIcon />
         <swiper
           :slidesPerView="'auto'"
           :centeredSlides="true"

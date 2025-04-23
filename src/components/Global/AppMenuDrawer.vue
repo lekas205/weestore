@@ -16,7 +16,7 @@
         </div>
 
         <section class="tw-flex tw-flex-col tw-h-[90%] tw-mt-8">
-          <h6 class="tw-font-bold tw-text-[20px]">Hi Michael</h6>
+          <h6 class="tw-font-bold tw-text-[20px]">Hi {{ firstName }}</h6>
           <ul class="tw-my-auto">
             <li
               class="tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
@@ -77,9 +77,14 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
+const userStore = useUserStore()
+
+const { profile } = storeToRefs(userStore)
 
 const props = defineProps<{
   show: boolean
@@ -96,6 +101,10 @@ const showDrawer = computed({
   set(value) {
     emit('update:show', value)
   },
+})
+
+const firstName = computed(() => {
+  return profile.value?.fullname.split(' ')[0]
 })
 
 const logout = () => {

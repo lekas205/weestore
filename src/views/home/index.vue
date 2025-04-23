@@ -17,7 +17,9 @@
       <v-tabs v-model="tab" align-tabs="center" color="primary" slider-color="primary">
         <v-tab
           :value="category.id"
-          v-for="(category, index) in categories"
+          v-for="(category, index) in categories.filter(
+            (cat) => cat.name.toLowerCase() !== 'groceries',
+          )"
           :key="index"
           class="tw-text-grey !tw-text-[17px] !tw-capitalize"
           >{{ category.name }}</v-tab

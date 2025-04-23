@@ -6,18 +6,19 @@
           <img src="@/assets/images/svgs/close.svg" class="tw-w-3" alt="close icon" />
         </button>
         <section class="tw-px-5 tw-flex tw-flex-col tw-gap-4">
-          <v-select
+          <v-combobox
             label="Select Bank Name"
             hide-details="auto"
             v-model="form.bankCode"
             item-value="code"
             item-title="name"
             :items="banks"
-          ></v-select>
+            :return-object="false"
+          ></v-combobox>
           <v-text-field
             hide-details="auto"
             label="Account Number"
-            type="text"
+            type="tel"
             v-model="form.accountNumber"
           ></v-text-field>
           <v-text-field
@@ -100,6 +101,7 @@ const submit = async () => {
   }
 
   if (res) {
+    await userStore.getProfile()
     toast.success(
       profile.value?.bank ? 'Bank account updated successfully' : 'Bank account added successfully',
       {
@@ -145,7 +147,7 @@ watch(
 watch(
   () => props.show,
   (newVal: boolean) => {
-    if (newVal && profile.value?.bank) {
+    if (newVal && profile.value?.bank.accountNumber) {
       form.value.accountNumber = profile.value.bank.accountNumber
       form.value.bankCode = profile.value.bank.bankCode
       accountName.value = profile.value.bank.accountName
