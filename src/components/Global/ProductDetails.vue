@@ -3,7 +3,9 @@
     <v-navigation-drawer v-model="showDrawer" temporary :width="450" color="#F4F4F8">
       <section class="tw-p-5 tw-flex tw-flex-col">
         <AppHeader back @go-back="showDrawer = false" title="Product Details" hideCartIcon />
+
         <swiper
+          v-if="product?.images"
           :slidesPerView="'auto'"
           :centeredSlides="true"
           :spaceBetween="70"
@@ -21,18 +23,27 @@
             />
           </swiper-slide>
         </swiper>
-        <div class="tw-w-full tw-px-10 tw-py-8 text-center bg-white tw-rounded-2xl">
+        <div class="tw-h-[270px] tw-w-full" v-else>
+          <img :src="product.image" class="tw-w-full tw-h-full tw-object-fill" />
+        </div>
+
+        <div class="tw-w-full tw-py-8 text-center bg-white tw-rounded-2xl">
           <h3 class="tw-text-[25px]">{{ product?.product_name }}</h3>
           <p class="tw-text-primary tw-text-[20px]">As at today</p>
 
-          <section class="tw-flex tw-flex-col tw-gap-3 mt-2">
+          <section class="tw-flex tw-flex-col tw-gap-3 mt-2 tw-px-10">
             <div class="tw-flex tw-justify-between tw-items-center">
               <p class="text">Unit Price</p>
               <p class="tw-text-success tw-text-[20px]">{{ formatAsMoney(product?.price) }}</p>
             </div>
             <div class="tw-flex tw-justify-between tw-items-center">
               <p>Min. Qty</p>
-              <QuantityStepper v-model="quantity" v-if="!isPurchased" />
+              <QuantityStepper
+                v-model="quantity"
+                v-if="!isPurchased"
+                :min-qty="product.min_quantity"
+                :max-qty="product.max_quantity"
+              />
               <p v-else>{{ product.quantity }}</p>
             </div>
             <div class="tw-flex tw-justify-between tw-items-center">
@@ -46,6 +57,10 @@
               </p>
             </div>
           </section>
+          <v-alert color="#FFF0D2" density="compact" type="warning" theme="dark" class="mt-5">
+            Minimun quantity is {{ product?.min_quantity }} and maximum quantity is
+            {{ product?.max_quantity }}
+          </v-alert>
         </div>
 
         <section v-if="!isPurchased">
@@ -113,7 +128,7 @@
 
 <script lang="ts" setup>
 import AppHeader from '@/components/Global/AppHeader.vue'
-import { ref, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import type { Products } from '@/types'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Pagination } from 'swiper/modules'
@@ -168,6 +183,16 @@ const AddToCart = async () => {
 
   loading.value = false
 }
+
+watch(
+  () => props.product,
+  (newValue: Products) => {
+    if (newValue) {
+      quantity.value = newValue.min_quantity
+    }
+  },
+  { deep: true },
+)
 </script>
 
 <style>

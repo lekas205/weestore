@@ -103,7 +103,6 @@ const showBankAccount = ref(false)
 async function copyToClipboard(text: string) {
   try {
     await navigator.clipboard.writeText(text)
-    console.log('Text copied to clipboard!')
     toast.success('Referral code copied to clipboard', {
       position: 'top',
       duration: 4000,

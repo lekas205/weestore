@@ -105,11 +105,15 @@ onMounted(async () => {
   if (!categories.value.length) {
     authStore.toggleLoader()
     await productStore.fetchCategories()
+
+    const getFirstCategory = categories.value.filter(
+      (category) => category.name.toLowerCase() !== 'groceries',
+    )
     await productStore.fetchProducts({
-      categoryId: categories.value[0].id,
+      categoryId: getFirstCategory[0].id,
     })
 
-    tab.value = categories.value[0].id
+    tab.value = getFirstCategory[0].id
     authStore.toggleLoader()
   }
 })

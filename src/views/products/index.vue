@@ -8,14 +8,14 @@
         v-for="(order, idx) in orders?.rows"
         :key="idx + 'aaa'"
         @click="showProductDetails(order)"
-        url="https://plus.unsplash.com/premium_photo-1740708549031-fd00d8821c5b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8"
+        :url="order.image"
       >
         <div class="tw-flex tw-justify-between tw-w-full tw-items-center">
           <p class="tw-text-[18px] tw-w-[100px]">{{ order.product_name }}</p>
 
           <div class="tw-text-primary text-center">
             <p class="tw-text-[17px]">Value</p>
-            <p class="tw-text-[18px] tw-font-semibold">{{ formatAsMoney(order.price) }}</p>
+            <p class="tw-text-[18px] tw-font-semibold">{{ formatAsMoney(order.total) }}</p>
           </div>
 
           <div class="tw-text-primary text-center">

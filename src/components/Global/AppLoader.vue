@@ -28,9 +28,10 @@
 .app-page-loader {
   position: absolute;
   z-index: 10000;
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   top: 0;
+  left: 0;
   background: #fbfbfb;
 
   svg {
@@ -39,7 +40,7 @@
     margin: 0;
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }

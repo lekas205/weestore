@@ -11,7 +11,7 @@
 
         <template v-if="cartItems?.data?.length">
           <section class="tw-mt-10">
-            <ProductItem v-for="(item, index) in cartItems?.data" :key="index" :url="item.image">
+            <ProductItem v-for="(item, index) in cartItems?.data" :key="index" :url="item.images">
               <section class="tw-flex tw-justify-between tw-w-full">
                 <div>
                   <label class="tw-text-[18px]"> {{ item.product_name }} </label>
@@ -25,7 +25,7 @@
                   <p class="tw-text-[16px]">WHP</p>
                   <p class="tw-text-success">{{ item.whp }}</p>
                   <button class="tw-text-primary" @click="deleteItem(item.cart_item_id)">
-                    Delete
+                    <v-icon icon="mdi-delete" end></v-icon>
                   </button>
                 </div>
               </section>
@@ -112,7 +112,9 @@ import { useCartStore } from '@/stores/cart.ts'
 import { formatAsMoney } from '@/utils/helpers.ts'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toast-notification'
+import { useAuthStore } from '@/stores/auth'
 
+const authStore = useAuthStore()
 const router = useRouter()
 const toast = useToast()
 const cartStore = useCartStore()
@@ -156,8 +158,10 @@ const placeOrder = () => {
   router.push('/home')
 }
 
-const deleteItem = (itemId: string) => {
-  cartStore.deleteICartItem(itemId)
+const deleteItem = async (itemId: string) => {
+  authStore.toggleLoader()
+  await cartStore.deleteICartItem(itemId)
+  authStore.toggleLoader()
 }
 
 const createOrder = async () => {

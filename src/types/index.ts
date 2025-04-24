@@ -27,6 +27,7 @@ export type Products = {
   category_id: string
   description: string
   images: any
+  image: string
   total: number
   start_date?: string
   interest_percent: number
