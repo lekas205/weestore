@@ -104,7 +104,7 @@ const showDrawer = computed({
 })
 
 const firstName = computed(() => {
-  return profile.value?.fullname.split(' ')[0]
+  return profile.value?.fullname?.split(' ')[0]
 })
 
 const logout = () => {

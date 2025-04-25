@@ -7,21 +7,29 @@
         </button>
         <section class="tw-p-4 tw-mt-[40px] text-center">
           <h2 class="tw-font-semibold tw-text-[25px]">Order Received</h2>
-          <p class="my-3">You’ll be contacted Shortly</p>
-          <p>+2348128392001</p>
+          <p class="my-3 tw-text-center">
+            Please check the 'My Products' section after 30 minutes to verify the status of your
+            transaction. Or Contact Admin for further Assistance.
+          </p>
+          <!-- <p>+2348128392001</p> -->
         </section>
 
-        <!-- <div class="text-center pb-4">
-          <v-btn class="tw-mt-3 tw-w-[80%] !tw-h-[50px] !tw-rounded-full" color="#FA4A0C">
-            Track My Order
+        <div class="text-center pb-4">
+          <v-btn
+            class="tw-mt-3 tw-w-[80%] !tw-h-[50px] !tw-rounded-full"
+            color="primary"
+            @click="router.push('/products')"
+          >
+            My Products
           </v-btn>
-        </div> -->
+        </div>
       </v-card>
     </v-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
 import { computed, ref } from 'vue'
 
 const props = defineProps<{
@@ -32,6 +40,7 @@ const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
 }>()
 
+const router = useRouter()
 const showModal = computed({
   get() {
     return props.show

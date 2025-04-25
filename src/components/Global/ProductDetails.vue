@@ -58,8 +58,7 @@
             </div>
           </section>
           <v-alert color="#FFF0D2" density="compact" type="warning" theme="dark" class="mt-5">
-            Minimun quantity is {{ product?.min_quantity }} and maximum quantity is
-            {{ product?.max_quantity }}
+            {{ alertDescription }}
           </v-alert>
         </div>
 
@@ -184,6 +183,13 @@ const AddToCart = async () => {
   loading.value = false
 }
 
+const alertDescription = computed(() => {
+  return props.isPurchased
+    ? `Quantity bought into your warehouse is ${props.product.quantity}`
+    : ` Minimun quantity is ${props.product?.min_quantity} and maximum quantity is
+            ${props.product.max_quantity}`
+})
+
 watch(
   () => props.product,
   (newValue: Products) => {
@@ -198,5 +204,9 @@ watch(
 <style>
 .swiper-slide {
   height: 300px;
+}
+
+.v-alert__content {
+  text-align: left;
 }
 </style>

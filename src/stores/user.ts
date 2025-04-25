@@ -8,7 +8,7 @@ import { handleStoreRequestError } from '@/utils/errorHandler'
 
 export const useUserStore = defineStore('user', () => {
   const banks = ref<BankList[]>([])
-  const profile = ref<userProfile>()
+  const profile = ref<userProfile>({} as userProfile)
 
   async function getProfile(): Promise<APIResponse | void> {
     try {

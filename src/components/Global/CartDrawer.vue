@@ -18,7 +18,7 @@
                   <p class="tw-text-success">Qty {{ item.quantity }}</p>
                   <div class="tw-flex tw-gap-6 tw-text-[16px] tw-text-success">
                     <p>Total Price</p>
-                    <p>{{ formatAsMoney(item.price) }}</p>
+                    <p>{{ formatAsMoney(item.price * item.quantity) }}</p>
                   </div>
                 </div>
                 <div class="tw-text-[18px] text-center">
@@ -103,7 +103,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import ProductItem from './ProductItem.vue'
 import PaymentMethods from './PaymentMethods.vue'
@@ -113,12 +113,16 @@ import { formatAsMoney } from '@/utils/helpers.ts'
 import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toast-notification'
 import { useAuthStore } from '@/stores/auth'
+import { useUserStore } from '@/stores/user.ts'
+
+const userStore = useUserStore()
 
 const authStore = useAuthStore()
 const router = useRouter()
 const toast = useToast()
 const cartStore = useCartStore()
 
+const { profile } = storeToRefs(userStore)
 const { cartItems } = storeToRefs(cartStore)
 
 const props = defineProps<{
@@ -193,6 +197,15 @@ const onCancelledPayment = () => {
     duration: 6000,
   })
 }
+
+watch(
+  () => props.show,
+  (newValue) => {
+    if (newValue) {
+      form.value.address = profile.value.address
+    }
+  },
+)
 </script>
 
 <style>
