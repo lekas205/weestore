@@ -8,7 +8,7 @@ import { handleStoreRequestError } from '@/utils/errorHandler'
 
 export const useTransactionStore = defineStore('transactions', () => {
   const wallets = ref<any>({})
-
+  const transactions = ref<any>({})
   async function transferToPocket(payload: transferToPocketDTO): Promise<APIResponse | void> {
     try {
       const { status, data } = await API.transactions.transferToPocket(payload)
@@ -74,9 +74,31 @@ export const useTransactionStore = defineStore('transactions', () => {
     }
   }
 
+  async function fetchTransactions(): Promise<APIResponse | void> {
+    try {
+      const { status, data } = await API.transactions.transactions()
+
+      if (status === 200 || status === 201) {
+        transactions.value = data.payload
+
+        console.log(transactions.value)
+
+        return {
+          success: true,
+          payload: data.payload,
+        }
+      }
+    } catch (error) {
+      const _error = error as AxiosError
+      handleStoreRequestError(_error)
+    }
+  }
+
   return {
     wallets,
+    transactions,
     walletTopup,
+    fetchTransactions,
     getWalletBalance,
     transferToBank,
     transferToPocket,

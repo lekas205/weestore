@@ -19,8 +19,13 @@ async function walletTopup(payload: transferToPocketDTO) {
   return await http.post<APIResponse>(ENDPOINTS.WALLET_TOPUP, payload)
 }
 
+async function transactions() {
+  return await http.get<APIResponse>(ENDPOINTS.TRANSACTIONS)
+}
+
 export default {
   walletTopup,
+  transactions,
   getWalletBalance,
   transferToBank,
   transferToPocket,
