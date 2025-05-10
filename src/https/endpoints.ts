@@ -27,3 +27,8 @@ export const UPDATE_BANK_ACCOUNT = `${customer}/update-bank-account`
 
 export const STATE = `utility/states`
 export const STORE = `utility/state/store/`
+
+export const WALLET = `${customer}/wallet`
+export const TRANSFER_POCKET = `${customer}/transfer`
+export const TRANSFER_BANK = `${customer}/withdrawal`
+export const WALLET_TOPUP = `${customer}/wallet/topup`

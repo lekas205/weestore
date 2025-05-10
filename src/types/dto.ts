@@ -75,3 +75,9 @@ export type bankAccountDTO = {
   bankName?: string
   accountName?: string
 }
+
+export type transferToPocketDTO = {
+  productId: string
+  unit: string
+  withdrawalType: string
+}

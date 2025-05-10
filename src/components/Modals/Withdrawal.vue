@@ -8,13 +8,17 @@
 
           <v-text-field
             hide-details="auto"
-            label="How Much do you want to Withdraw?"
+            label="How many unit do you want to Withdraw?"
             type="text"
+            v-model="form.unit"
+            :maxLength="units"
           ></v-text-field>
         </div>
 
         <template v-slot:actions>
-          <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#009930"> Withdraw</v-btn>
+          <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#009930" @click="submit">
+            Withdraw</v-btn
+          >
           <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#FA4A0C" @click="showModal = false">
             Cancel</v-btn
           >
@@ -29,10 +33,12 @@ import { computed, ref } from 'vue'
 
 const props = defineProps<{
   show: boolean
+  units: number
 }>()
 
 const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
+  (e: 'proceed', value: number): void
 }>()
 
 const showModal = computed({
@@ -44,7 +50,13 @@ const showModal = computed({
   },
 })
 
+const submit = () => {
+  alert('hello')
+  emit('proceed', form.value.unit)
+  showModal.value = false
+}
+
 const form = ref({
-  address: '',
+  unit: 0,
 })
 </script>

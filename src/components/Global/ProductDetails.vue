@@ -37,7 +37,7 @@
               <p class="tw-text-success tw-text-[20px]">{{ formatAsMoney(product?.price) }}</p>
             </div>
             <div class="tw-flex tw-justify-between tw-items-center">
-              <p>Min. Qty</p>
+              <p>{{ !isPurchased ? ' Min. Qty' : 'Unit(s)' }}</p>
               <QuantityStepper
                 v-model="quantity"
                 v-if="!isPurchased"
@@ -121,8 +121,12 @@
     </v-navigation-drawer>
   </v-layout>
 
-  <Withdrawal v-model:show="showWithdrawal" />
-  <PocketTransfer v-model:show="showPocketModal" />
+  <Withdrawal v-model:show="showWithdrawal" :units="product.quantity" @proceed="transferToBank" />
+  <PocketTransfer
+    v-model:show="showPocketModal"
+    :units="product.quantity"
+    @proceed="transferToPocket"
+  />
 </template>
 
 <script lang="ts" setup>
@@ -136,10 +140,17 @@ import QuantityStepper from './QuantityStepper.vue'
 import Withdrawal from '@/components/Modals/Withdrawal.vue'
 import PocketTransfer from '@/components/Modals/PocketTransfer.vue'
 import { useCartStore } from '@/stores/cart.ts'
+import { useTransactionStore } from '@/stores//transaction.ts'
 import { useToast } from 'vue-toast-notification'
+import { TRANSACTION_TYPES } from '@/utils/constants'
+import { useAuthStore } from '@/stores/auth'
+import { useProductsStore } from '@/stores/products.ts'
 
+const productStore = useProductsStore()
 const toast = useToast()
 const cartStore = useCartStore()
+const authStore = useAuthStore()
+const transactionStore = useTransactionStore()
 
 const props = defineProps<{
   show: boolean
@@ -181,6 +192,48 @@ const AddToCart = async () => {
   }
 
   loading.value = false
+}
+
+const transferToPocket = async (unit: number) => {
+  authStore.toggleLoader()
+  const res = await transactionStore.transferToPocket({
+    productId: props.product.product_id,
+    unit: unit.toString(),
+    withdrawalType: TRANSACTION_TYPES.pocket,
+  })
+
+  if (res) {
+    await productStore.fetchCustomerOrder()
+    toast.success('Transfer to pocket successful', {
+      position: 'top',
+      duration: 6000,
+    })
+
+    showDrawer.value = false
+  }
+
+  authStore.toggleLoader()
+}
+
+const transferToBank = async (unit: number) => {
+  authStore.toggleLoader()
+  const res = await transactionStore.transferToBank({
+    productId: props.product.product_id,
+    unit: unit.toString(),
+    withdrawalType: TRANSACTION_TYPES.bank,
+  })
+
+  if (res) {
+    await productStore.fetchCustomerOrder()
+    toast.success('Transfer to Bank successful', {
+      position: 'top',
+      duration: 6000,
+    })
+
+    showDrawer.value = false
+  }
+
+  authStore.toggleLoader()
 }
 
 const alertDescription = computed(() => {

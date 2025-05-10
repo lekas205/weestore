@@ -19,11 +19,26 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import PocketView from './components/PocketView.vue'
 import RewardView from './components/RewardView.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
+import { useAuthStore } from '@/stores/auth'
+import { useTransactionStore } from '@/stores//transaction.ts'
+
+const authStore = useAuthStore()
+const transactionStore = useTransactionStore()
 
 const tabs = ref(['pocket', 'reward'])
 const activeTab = ref('pocket')
+
+const getWalletBallance = async () => {
+  authStore.toggleLoader()
+  await transactionStore.getWalletBalance()
+  authStore.toggleLoader()
+}
+
+onMounted(() => {
+  getWalletBallance()
+})
 </script>
