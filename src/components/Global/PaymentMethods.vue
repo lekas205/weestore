@@ -21,7 +21,7 @@
       </v-container>
     </section>
   </div>
-  <BankPayment v-model:show="showBankPayment" />
+  <BankPayment v-model:show="showBankPayment" @uploadImageUrls="uploadedImage" />
 </template>
 
 <script setup lang="ts">
@@ -30,15 +30,24 @@ import BankPayment from '../Modals/BankPayment.vue'
 
 const method = defineModel()
 
+const emit = defineEmits<{
+  (e: 'uploadedImageUrls', value: string[]): void
+}>()
+
 const showBankPayment = ref(false)
 const paymentOptions = ref([
   { icon: '', label: 'Pay With Paystack', value: 'PAYSTACK' },
   { icon: '', label: 'Pay With Bank', value: 'BANK' },
-  { icon: '', label: 'Pocket', value: 'POCKET' },
+  { icon: '', label: 'Pocket', value: 'WALLET' },
 ])
 
+const uploadedImage = (value: string[]) => {
+  showBankPayment.value = false
+  emit('uploadedImageUrls', value)
+}
+
 const handlePaymentMethod = (value: string) => {
-  if (value === 'bank') {
+  if (value === 'BANK') {
     showBankPayment.value = true
   }
 }

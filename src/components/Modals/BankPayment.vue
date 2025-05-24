@@ -25,17 +25,23 @@
         </section>
 
         <div class="text-center">
-          <v-btn class="tw-my-8 tw-w-[80%] !tw-h-[50px] !tw-rounded-full" color="#FA4A0C">
+          <v-btn
+            class="tw-my-8 tw-w-[80%] !tw-h-[50px] !tw-rounded-full"
+            color="primary"
+            @click="showUploadModal = true"
+          >
             Upload Proof Of Payment
           </v-btn>
         </div>
       </v-card>
     </v-dialog>
+    <UpLoadFile v-model:show="showUploadModal" @uploadImageUrls="uploadedImage" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import UpLoadFile from '@/components/Modals/UploadFile.vue'
 
 const props = defineProps<{
   show: boolean
@@ -43,8 +49,15 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
+  (e: 'uploadImageUrls', value: string[]): void
 }>()
 
+const showUploadModal = ref(false)
+
+const uploadedImage = (value: string[]) => {
+  showUploadModal.value = false
+  emit('uploadImageUrls', value)
+}
 const showModal = computed({
   get() {
     return props.show

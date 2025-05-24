@@ -1,7 +1,7 @@
 <template>
   <AppHeader title="Payment History" />
 
-  <div class="mt-6 tw-h-[calc(100vh-9rem)] tw-flex tw-flex-col">
+  <div class="tw-h-[calc(100vh-9rem)] tw-flex tw-flex-col">
     <!-- <section
       class="tw-bg-white tw-flex tw-justify-between tw-rounded-tr-3xl tw-rounded-tl-3xl tw-p-4"
     >
@@ -9,7 +9,7 @@
       <img src="@/assets/images/svgs/calendar.svg" alt="" />
     </section> -->
 
-    <section class="tw-bg-white px-4 py-6 mt-4" v-if="transactions?.rows?.length">
+    <section class="tw-bg-white px-4 py-6 mt-1" v-if="transactions?.rows?.length">
       <div
         class="tw-flex tw-justify-between tw-mb-5 !tw-last:mb-0"
         v-for="(trans, index) in transactions.rows"

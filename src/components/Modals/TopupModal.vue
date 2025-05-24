@@ -72,7 +72,12 @@
       </v-card>
     </v-dialog>
 
-    <UpLoadFile v-model:show="showUploadModal" />
+    <UpLoadFile
+      v-model:show="showUploadModal"
+      @uploadImageUrls="uploadedImage"
+      @amount="saveAmount"
+      showAmount
+    />
     <paystack-modal
       id="paystack-topup-modal"
       :amount="paystackData?.amount"
@@ -93,7 +98,9 @@ import { computed, ref } from 'vue'
 import { useTransactionStore } from '@/stores//transaction.ts'
 import { useToast } from 'vue-toast-notification'
 import UpLoadFile from './UploadFile.vue'
+import { useAuthStore } from '@/stores/auth'
 
+const authStore = useAuthStore()
 const toast = useToast()
 const transactionStore = useTransactionStore()
 
@@ -102,8 +109,17 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
+  (e: 'amount', value: string): void
   (e: 'update:show', value: boolean): void
+  (e: 'uploadImageUrls', value: string[]): void
 }>()
+
+const uploadedImage = (value: string[]) => {
+  showUploadModal.value = false
+  paymentProof.value = value
+
+  proceed()
+}
 
 const showModal = computed({
   get() {
@@ -118,32 +134,45 @@ const loading = ref(false)
 const paystackData = ref()
 const showUploadModal = ref(false)
 const activeTab = ref('paystack')
-const topupOptions = ref(['paystack', 'bank transfer'])
+const paymentProof = ref<string[]>([])
+const topupOptions = ref(['paystack', 'bank'])
 
 const amount = ref()
 
 const proceed = async () => {
-  loading.value = true
+  authStore.toggleLoader()
   const res = await transactionStore.walletTopup({
     amount: amount.value,
-    paymentMethod: 'PAYSTACK',
+    paymentMethod: activeTab.value.toUpperCase(),
+    paymentProof: paymentProof.value[0],
   })
 
-  if (res) {
+  if (res?.success && activeTab.value === 'paystack') {
     paystackData.value = res.payload
     setTimeout(() => {
       document.getElementById('paystack-topup-modal')?.click()
     }, 1000)
+  } else if (res?.success && activeTab.value === 'bank') {
+    showModal.value = false
+    toast.success('Topup request have been sent awaiting approval', {
+      position: 'top',
+      duration: 6000,
+    })
   }
-  loading.value = false
+  authStore.toggleLoader()
+}
+
+const saveAmount = (value: string) => {
+  amount.value = value
 }
 
 const onSuccessfulPayment = () => {
   transactionStore.getWalletBalance()
   showModal.value = false
-  // cartStore.fetchCartItems()
-  // showDrawer.value = false
-  // showOrderSuccess.value = true
+  toast.success('Topup successful', {
+    position: 'top',
+    duration: 6000,
+  })
 }
 
 const onCancelledPayment = () => {

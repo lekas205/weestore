@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppHeader />
-    <div class="mt-10">
+    <div>
       <h1 class="tw-text-[34px] mb-4">
         Fast Selling <br />
         FMCG for you

@@ -128,6 +128,7 @@
           block
           :loading="loading"
           type="submit"
+          :disabled="!terms || loading"
         >
           Signup</v-btn
         >

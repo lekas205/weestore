@@ -1,6 +1,6 @@
 <template>
   <AppHeader />
-  <div class="tw-flex mt-10 tw-justify-between tw-gap-5">
+  <div class="tw-flex mt-2 tw-justify-between tw-gap-5">
     <div
       v-for="tab in tabs"
       :key="tab"

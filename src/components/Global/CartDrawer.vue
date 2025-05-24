@@ -44,7 +44,7 @@
                 class="tw-px-10 tw-py-4 tw-w-full tw-text-[20px] tw-rounded-full tw-shadow-sm tw-bg-white tw-outline-primary"
               />
             </section>
-            <PaymentMethods v-model="form.paymentMethod" />
+            <PaymentMethods v-model="form.paymentMethod" @uploadedImageUrls="handleUploadedUrl" />
           </section>
 
           <div class="tw-flex tw-justify-between tw-gap-4 tw-flex-wrap tw-mt-8 tw-pb-7">
@@ -77,7 +77,7 @@
           <v-btn
             class="!tw-h-[70px] !tw-rounded-full tw-w-full mt-4"
             color="primary"
-            @click="placeOrder"
+            @click="handlePayment"
           >
             Place Order</v-btn
           >
@@ -98,7 +98,6 @@
       </paystack-modal>
     </v-navigation-drawer>
   </v-layout>
-
   <OrderSuccess v-model:show="showOrderSuccess" />
 </template>
 
@@ -137,9 +136,14 @@ const loading = ref(false)
 const showOrderSuccess = ref(false)
 
 const paystackData = ref()
-const form = ref({
+const form = ref<{
+  address: string
+  paymentMethod: string
+  paymentProof: string
+}>({
   address: '',
   paymentMethod: '',
+  paymentProof: '',
 })
 
 const showDrawer = computed({
@@ -162,10 +166,18 @@ const placeOrder = () => {
   router.push('/home')
 }
 
+const handleUploadedUrl = (urls: string[]) => {
+  form.value.paymentProof = urls[0]
+}
+
 const deleteItem = async (itemId: string) => {
   authStore.toggleLoader()
   await cartStore.deleteICartItem(itemId)
   authStore.toggleLoader()
+}
+
+const handlePayment = () => {
+  createOrder()
 }
 
 const createOrder = async () => {
@@ -176,13 +188,25 @@ const createOrder = async () => {
   loading.value = true
   const response = await cartStore.createOrder(payload)
   if (response) {
-    paystackData.value = response.payload
-
-    setTimeout(() => {
-      document.getElementById('paystack-modal')?.click()
-    }, 1000)
+    if (form.value.paymentMethod === 'PAYSTACK') {
+      handlePaystackPayment(response.payload)
+    } else {
+      toast.success('Order created successfully', {
+        position: 'top',
+        duration: 6000,
+      })
+      showDrawer.value = false
+      router.push('/home')
+    }
   }
   loading.value = false
+}
+
+const handlePaystackPayment = (data: any) => {
+  paystackData.value = data
+  setTimeout(() => {
+    document.getElementById('paystack-modal')?.click()
+  }, 1000)
 }
 
 const onSuccessfulPayment = () => {

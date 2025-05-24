@@ -20,13 +20,15 @@
           @click:append-inner="showPin = !showPin"
           :append-inner-icon="!showPin ? 'mdi-eye' : 'mdi-eye-off'"
         ></v-text-field>
-        <RouterLink :to="ROUTES.reset_pin.path" class="tw-block tw-my-4 tw-text-primary"
-          >PIN Reset</RouterLink
+        <RouterLink
+          :to="ROUTES.reset_pin.path"
+          class="tw-block tw-my-4 tw-text-primary tw-underline"
+          >Pin Reset</RouterLink
         >
       </div>
 
       <v-btn
-        class="tw-mt-auto !tw-h-[70px] !tw-rounded-full"
+        class="!tw-h-[70px] !tw-rounded-full"
         color="#FA4A0C"
         @click="login"
         :loading="loading"

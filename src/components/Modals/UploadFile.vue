@@ -10,13 +10,23 @@
           </button>
         </div>
 
-        <input
-          type="file"
-          label="Upload File"
+        <v-text-field
+          hide-details="auto"
+          label="Amount"
+          type="tel"
+          v-model="amount"
+          v-if="showAmount"
+          @blur="emit('amount', amount)"
+          class="tw-mb-4"
+        ></v-text-field>
+
+        <v-file-input
+          accept="image/png, image/jpeg, image/bmp"
+          label="Photos"
+          placeholder="Upload your photos"
           prepend-icon="mdi-camera"
-          variant="filled"
           @change="saveFileToLocal"
-        />
+        ></v-file-input>
 
         <div class="tw-flex tw-gap-4 tw-flex-wrap" v-if="files.length">
           <div v-for="(file, idx) in files" :key="idx" class="tw-relative">
@@ -35,6 +45,7 @@
             class="tw-my-8 tw-w-full !tw-h-[50px] !tw-rounded-full"
             color="primary"
             @click="proceedToUpload"
+            :loading="loading"
           >
             Upload
           </v-btn>
@@ -55,11 +66,13 @@ interface CustomFile extends File {
 const toast = useToast()
 const props = defineProps<{
   show: boolean
+  showAmount?: boolean
 }>()
 
 const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
-  (e: 'uploaded', value: boolean): void
+  (e: 'uploadImageUrls', urls: string[]): void
+  (e: 'amount', value: string): void
 }>()
 
 const showModal = computed({
@@ -72,6 +85,7 @@ const showModal = computed({
 })
 
 const loading = ref(false)
+const amount = ref('')
 const files = ref<CustomFile[]>([])
 
 function saveFileToLocal(event: any): void {
@@ -100,9 +114,15 @@ function handleFilePreview(file: CustomFile) {
 
 const proceedToUpload = async () => {
   loading.value = true
-  await handleFileUpload([...files.value])
-  loading.value = false
+  const urls = await handleFileUpload([...files.value])
 
-  emit('uploaded', true)
+  if (urls) {
+    emit('uploadImageUrls', urls)
+    toast.success('Files uploaded successfully', {
+      position: 'top',
+      duration: 3000,
+    })
+  }
+  loading.value = false
 }
 </script>

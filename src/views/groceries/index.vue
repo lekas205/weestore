@@ -2,7 +2,7 @@
   <div>
     <AppHeader />
     <template v-if="products.length">
-      <div class="mt-10">
+      <div class="mt-2">
         <h1 class="tw-text-[34px] mb-4">
           Explore our <br />
           Farm Produce
