@@ -58,7 +58,6 @@
         </v-tab-item>
       </template>
     </div>
-    <AppBottomBar />
     <ProductDetails v-model:show="showDetails" :product="productDetails" />
   </div>
 </template>
@@ -71,7 +70,6 @@ import { Swiper, SwiperSlide } from 'swiper/vue'
 import ProductDetails from '@/components/Global/ProductDetails.vue'
 import ProductCard from '@/components/Global/ProductCard.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
-import AppBottomBar from '@/components/Global/AppBottomBar.vue'
 import { useProductsStore } from '@/stores/products.ts'
 import { useAuthStore } from '@/stores/auth'
 

@@ -35,6 +35,8 @@ import { useTransactionStore } from '@/stores//transaction.ts'
 import { storeToRefs } from 'pinia'
 import { formatAsMoney, formatDate } from '@/utils/helpers.ts'
 import TopupModal from '@/components/Modals/TopupModal.vue'
+import router from '@/router'
+import { ROUTES } from '@/router/routes/routes'
 
 const transactionStore = useTransactionStore()
 
@@ -61,9 +63,9 @@ const handleAction = (item: string) => {
   if (item === 'top-up') {
     showTopupModal.value = true
   } else if (item === 'buy-marketplace') {
-    // Handle buy from marketplace action
+    router.push({ name: ROUTES.home.name })
   } else if (item === 'buy-groceries') {
-    // Handle buy groceries action
+    router.push({ name: ROUTES.groceries.name })
   }
 }
 </script>

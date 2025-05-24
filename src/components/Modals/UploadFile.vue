@@ -118,10 +118,6 @@ const proceedToUpload = async () => {
 
   if (urls) {
     emit('uploadImageUrls', urls)
-    toast.success('Files uploaded successfully', {
-      position: 'top',
-      duration: 3000,
-    })
   }
   loading.value = false
 }

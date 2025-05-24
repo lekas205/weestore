@@ -144,7 +144,7 @@ const proceed = async () => {
   const res = await transactionStore.walletTopup({
     amount: amount.value,
     paymentMethod: activeTab.value.toUpperCase(),
-    paymentProof: paymentProof.value[0],
+    paymentUrl: paymentProof.value[0],
   })
 
   if (res?.success && activeTab.value === 'paystack') {
