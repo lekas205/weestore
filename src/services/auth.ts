@@ -43,6 +43,10 @@ async function resendPhoneOtp(payload: resendPhoneOtpDTO) {
   return await http.post<APIResponse>(ENDPOINTS.RESEND_PHONE_OTP, payload)
 }
 
+async function deleteAccount() {
+  return await http.delete<APIResponse>(ENDPOINTS.DELETE_ACCOUNT)
+}
+
 export default {
   loginUser,
   getStores,
@@ -52,6 +56,7 @@ export default {
   registerUser,
   verifyAccount,
   changeNumber,
+  deleteAccount,
   forgotPassword,
   resendPhoneOtp,
 }

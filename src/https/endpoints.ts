@@ -33,3 +33,8 @@ export const TRANSFER_POCKET = `${customer}/transfer`
 export const TRANSFER_BANK = `${customer}/withdrawal`
 export const WALLET_TOPUP = `${customer}/wallet/topup`
 export const TRANSACTIONS = `${customer}/transactions`
+
+export const REWARDS_TRANSFER_TO_POCKET = `${customer}/reward/transfer`
+export const REWARDS_TRANSFER_TO_BANK = `${customer}/reward/withdraw`
+
+export const DELETE_ACCOUNT = `${customer}/delete-account`

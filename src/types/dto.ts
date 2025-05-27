@@ -81,3 +81,11 @@ export type transferToPocketDTO = {
   unit: string
   withdrawalType: string
 }
+
+export type rewardsTransferToPocketDTO = {
+  amount: string | number
+}
+
+export type rewardsTransferToBankDTO = {
+  amount: string | number
+}

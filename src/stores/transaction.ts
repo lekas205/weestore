@@ -2,13 +2,18 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { API } from '../services'
 import { AxiosError } from 'axios'
-import type { transferToPocketDTO } from '../types/dto'
+import type {
+  transferToPocketDTO,
+  rewardsTransferToPocketDTO,
+  rewardsTransferToBankDTO,
+} from '../types/dto'
 import type { APIResponse } from '../types'
 import { handleStoreRequestError } from '@/utils/errorHandler'
 
 export const useTransactionStore = defineStore('transactions', () => {
   const wallets = ref<any>({})
   const transactions = ref<any>({})
+
   async function transferToPocket(payload: transferToPocketDTO): Promise<APIResponse | void> {
     try {
       const { status, data } = await API.transactions.transferToPocket(payload)
@@ -94,6 +99,42 @@ export const useTransactionStore = defineStore('transactions', () => {
     }
   }
 
+  async function rewardsTransferToPocket(
+    payload: rewardsTransferToPocketDTO,
+  ): Promise<APIResponse | void> {
+    try {
+      const { status, data } = await API.transactions.rewardsTransferToPocket(payload)
+
+      if (status === 200 || status === 201) {
+        return {
+          success: true,
+          payload: data.payload,
+        }
+      }
+    } catch (error) {
+      const _error = error as AxiosError
+      handleStoreRequestError(_error)
+    }
+  }
+
+  async function rewardsTransferToBank(
+    payload: rewardsTransferToBankDTO,
+  ): Promise<APIResponse | void> {
+    try {
+      const { status, data } = await API.transactions.rewardsTransferToBank(payload)
+
+      if (status === 200 || status === 201) {
+        return {
+          success: true,
+          payload: data.payload,
+        }
+      }
+    } catch (error) {
+      const _error = error as AxiosError
+      handleStoreRequestError(_error)
+    }
+  }
+
   return {
     wallets,
     transactions,
@@ -102,5 +143,7 @@ export const useTransactionStore = defineStore('transactions', () => {
     getWalletBalance,
     transferToBank,
     transferToPocket,
+    rewardsTransferToBank,
+    rewardsTransferToPocket,
   }
 })

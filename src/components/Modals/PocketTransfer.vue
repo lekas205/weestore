@@ -10,7 +10,11 @@
 
           <v-text-field
             hide-details="auto"
-            label="How many unit do you want to Transfer?"
+            :label="
+              rewards
+                ? 'How much do you want to transfer'
+                : 'How many unit do you want to transfer?'
+            "
             type="number"
             v-model="form.unit"
             :maxLength="units"
@@ -35,7 +39,8 @@ import { computed, ref } from 'vue'
 
 const props = defineProps<{
   show: boolean
-  units: number
+  units?: number
+  rewards?: boolean
 }>()
 
 const emit = defineEmits<{

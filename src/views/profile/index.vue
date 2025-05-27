@@ -72,26 +72,41 @@
           </span>
         </a>
       </li>
-      <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px]">Delete Account</li>
+      <li
+        class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px] tw-relative tw-text-red-600"
+        @click="showDeleteAccount = true"
+      >
+        Delete Account
+
+        <span class="tw-absolute tw-right-5 -tw-translate-y-1/2 tw-top-1/2">
+          <img src="@/assets/images/svgs/bin.svg" alt="" />
+        </span>
+      </li>
     </ul>
   </div>
 
   <ChangePin v-model:show="showChangePin" />
   <ChangeAddress v-model:show="showChangeAddress" />
   <ChangeBankAccount v-model:show="showBankAccount" />
+  <DeleteAccount v-model:show="showDeleteAccount" @proceed="deleteAccount" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
 import ChangePin from '@/components/Modals/ChangePin.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ChangeAddress from '@/components/Modals/ChangeAddress.vue'
 import ChangeBankAccount from '@/components/Modals/ChangeBankAccount.vue'
 import { useUserStore } from '@/stores/user.ts'
+import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from 'vue-toast-notification'
+import DeleteAccount from '@/components/Modals/DeleteAccount.vue'
 
 const toast = useToast()
+const router = useRouter()
+const authStore = useAuthStore()
 const userStore = useUserStore()
 
 const { profile } = storeToRefs(userStore)
@@ -99,6 +114,7 @@ const { profile } = storeToRefs(userStore)
 const showChangePin = ref(false)
 const showChangeAddress = ref(false)
 const showBankAccount = ref(false)
+const showDeleteAccount = ref(false)
 
 async function copyToClipboard(text: string) {
   try {
@@ -114,5 +130,30 @@ async function copyToClipboard(text: string) {
     })
     console.error('Failed to copy text: ', err)
   }
+}
+
+const deleteAccount = async () => {
+  authStore.toggleLoader()
+  const res = await authStore.deleteAccount()
+  if (res) {
+    logout()
+    toast.success('Account deleted successfully', {
+      position: 'top',
+      duration: 6000,
+    })
+  } else {
+    toast.error('Failed to delete account', {
+      position: 'top',
+      duration: 6000,
+    })
+  }
+  authStore.toggleLoader()
+}
+
+const logout = () => {
+  // Implement logout logic here
+  localStorage.clear()
+
+  router.push('/login')
 }
 </script>

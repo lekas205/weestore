@@ -100,20 +100,20 @@ watch(tab, async (newTab, oldTab) => {
 })
 
 onMounted(async () => {
+  authStore.toggleLoader()
   if (!categories.value.length) {
-    authStore.toggleLoader()
     await productStore.fetchCategories()
-
-    const getFirstCategory = categories.value.filter(
-      (category) => category.name.toLowerCase() !== 'groceries',
-    )
-    await productStore.fetchProducts({
-      categoryId: getFirstCategory[0].id,
-    })
-
-    tab.value = getFirstCategory[0].id
-    authStore.toggleLoader()
   }
+
+  const getFirstCategory = categories.value.filter(
+    (category) => category.name.toLowerCase() !== 'groceries',
+  )
+  await productStore.fetchProducts({
+    categoryId: getFirstCategory[0].id,
+  })
+
+  tab.value = getFirstCategory[0].id
+  authStore.toggleLoader()
 })
 </script>
 

@@ -1,6 +1,10 @@
 import http from '../https'
 import type { APIResponse } from '../types'
-import type { transferToPocketDTO } from '../types/dto'
+import type {
+  transferToPocketDTO,
+  rewardsTransferToBankDTO,
+  rewardsTransferToPocketDTO,
+} from '../types/dto'
 import * as ENDPOINTS from '../https/endpoints'
 
 async function transferToPocket(payload: transferToPocketDTO) {
@@ -23,10 +27,20 @@ async function transactions() {
   return await http.get<APIResponse>(ENDPOINTS.TRANSACTIONS)
 }
 
+async function rewardsTransferToPocket(payload: rewardsTransferToPocketDTO) {
+  return await http.post<APIResponse>(ENDPOINTS.REWARDS_TRANSFER_TO_POCKET, payload)
+}
+
+async function rewardsTransferToBank(payload: rewardsTransferToBankDTO) {
+  return await http.post<APIResponse>(ENDPOINTS.REWARDS_TRANSFER_TO_BANK, payload)
+}
+
 export default {
   walletTopup,
   transactions,
   getWalletBalance,
   transferToBank,
   transferToPocket,
+  rewardsTransferToBank,
+  rewardsTransferToPocket,
 }

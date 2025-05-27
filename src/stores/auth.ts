@@ -196,6 +196,21 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  async function deleteAccount(): Promise<APIResponse | void> {
+    try {
+      const { status, data } = await API.auth.deleteAccount()
+      if (status === 200 || status === 201) {
+        return {
+          success: true,
+          payload: data.payload,
+        }
+      }
+    } catch (error) {
+      const _error = error as AxiosError
+      handleStoreRequestError(_error)
+    }
+  }
+
   return {
     states,
     stores,
@@ -212,6 +227,7 @@ export const useAuthStore = defineStore('auth', () => {
     initiateSignup,
     verifyAccount,
     forgotPassword,
+    deleteAccount,
     removeSavedAuthToken,
   }
 })
