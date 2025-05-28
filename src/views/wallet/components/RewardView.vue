@@ -47,10 +47,6 @@ const transactionStore = useTransactionStore()
 
 const { wallets } = storeToRefs(transactionStore)
 
-const props = defineProps<{
-  rewards: any
-}>()
-
 const getWalletBallance = computed(() => {
   return (
     wallets.value?.rows?.find((elm: any) => elm.wallet_type.toLowerCase() === 'reward')?.amount || 0

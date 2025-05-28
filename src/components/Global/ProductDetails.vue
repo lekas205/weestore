@@ -215,7 +215,7 @@ const transferToPocket = async (unit: number) => {
   authStore.toggleLoader()
 }
 
-const transferToBank = async (unit: number) => {
+const transferToBank = async (unit: number | string) => {
   authStore.toggleLoader()
   const res = await transactionStore.transferToBank({
     productId: props.product.product_id,
