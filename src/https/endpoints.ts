@@ -37,4 +37,4 @@ export const TRANSACTIONS = `${customer}/transactions`
 export const REWARDS_TRANSFER_TO_POCKET = `${customer}/reward/transfer`
 export const REWARDS_TRANSFER_TO_BANK = `${customer}/reward/withdraw`
 
-export const DELETE_ACCOUNT = `${customer}/delete-account`
+export const DELETE_ACCOUNT = `${customer}`
