@@ -51,7 +51,7 @@ const getWalletBallance = computed(() => {
 const showTopupModal = ref(false)
 const actions = ref([
   { icon: 'money', label: 'Top up', value: 'top-up' },
-  { icon: 'gift', label: 'Buy from Marketplace', value: 'buy-marketplace' },
+  { icon: 'gift', label: 'Restock', value: 'buy-marketplace' },
   { icon: 'wallet', label: 'Buy Groceries', value: 'buy-groceries' },
 ])
 

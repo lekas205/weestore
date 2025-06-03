@@ -1,14 +1,14 @@
 <template>
-  <div class="text-center pa-4">
-    <v-dialog v-model="showModal" width="auto">
-      <v-card min-width="320" class="!tw-rounded-[20px]">
+  <v-dialog v-model="showModal" width="auto">
+    <v-card min-width="320" class="!tw-rounded-[20px]">
+      <div class="text-center pa-4">
         <button class="tw-absolute tw-right-4 tw-top-6" @click="showModal = false">
           <img src="@/assets/images/svgs/close.svg" class="tw-w-3" alt="close icon" />
         </button>
         <section class="tw-p-4 tw-mt-[40px] text-center">
           <h2 class="tw-font-semibold tw-text-[25px]">Order Received</h2>
           <p class="my-3 tw-text-center">
-            Please check the 'My Products' section after 30 minutes to verify the status of your
+            Please check the 'My Products' section after 5 minutes to verify the status of your
             transaction. Or Contact Admin for further Assistance.
           </p>
           <!-- <p>+2348128392001</p> -->
@@ -23,9 +23,9 @@
             My Products
           </v-btn>
         </div>
-      </v-card>
-    </v-dialog>
-  </div>
+      </div>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup lang="ts">

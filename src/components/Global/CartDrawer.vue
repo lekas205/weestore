@@ -77,7 +77,7 @@
           <v-btn
             class="!tw-h-[70px] !tw-rounded-full tw-w-full mt-4"
             color="primary"
-            @click="handlePayment"
+            @click="placeOrder"
           >
             Place Order</v-btn
           >
@@ -174,10 +174,6 @@ const deleteItem = async (itemId: string) => {
   authStore.toggleLoader()
   await cartStore.deleteICartItem(itemId)
   authStore.toggleLoader()
-}
-
-const handlePayment = () => {
-  createOrder()
 }
 
 const createOrder = async () => {

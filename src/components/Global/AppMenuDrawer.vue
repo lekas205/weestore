@@ -22,7 +22,15 @@
               class="tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
             >
               <router-link to="/home" class="tw-flex">
-                <img src="@/assets/images/svgs/sheild.svg" alt="Order Icon" class="mr-5" /> Orders
+                <img src="@/assets/images/svgs/sheild.svg" alt="Order Icon" class="mr-5" /> Restock
+              </router-link>
+            </li>
+            <li
+              class="tw-flex tw-font-bold ttw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+            >
+              <router-link to="/groceries" class="tw-flex">
+                <img src="@/assets/images/svgs/shopping-cart.svg" alt="Order Icon" class="mr-5" />
+                Groceries
               </router-link>
             </li>
             <li
@@ -30,7 +38,7 @@
             >
               <router-link to="/products" class="tw-flex">
                 <img src="@/assets/images/svgs/shopping-cart.svg" alt="Order Icon" class="mr-5" />
-                My Products
+                My Inventory
               </router-link>
             </li>
             <li
@@ -48,14 +56,7 @@
                 <img src="@/assets/images/svgs/tag.svg" alt="Order Icon" class="mr-5" /> My Wallet
               </router-link>
             </li>
-            <li
-              class="tw-flex tw-font-bold ttw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
-            >
-              <router-link to="/groceries" class="tw-flex">
-                <img src="@/assets/images/svgs/shopping-cart.svg" alt="Order Icon" class="mr-5" />
-                Groceries
-              </router-link>
-            </li>
+
             <li
               class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
             >

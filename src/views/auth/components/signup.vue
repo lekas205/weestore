@@ -156,7 +156,7 @@ const loading = ref(false)
 const showPin = ref(false)
 const showConfirmPin = ref(false)
 const form = ref<registerDTO>({
-  state: '',
+  state: '080',
   firstName: '',
   lastName: '',
   phoneNo: '',
@@ -204,5 +204,6 @@ const register = async () => {
 
 onMounted(() => {
   authStore.fetchStates()
+  authStore.fetchStores(form.value.state)
 })
 </script>

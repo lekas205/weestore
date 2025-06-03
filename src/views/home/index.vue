@@ -1,11 +1,8 @@
 <template>
   <div>
     <AppHeader />
-    <div>
-      <h1 class="tw-text-[34px] mb-4">
-        Fast Selling <br />
-        FMCG for you
-      </h1>
+    <div class="mt-5">
+      <h1 class="tw-text-[34px] mb-4">Explore Our <br />Monthly Food Sharing</h1>
 
       <div class="mb-6">
         <input

@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center pa-4">
-    <v-dialog v-model="showModal" width="auto">
-      <v-card min-width="320" class="!tw-rounded-[20px]">
+  <v-dialog v-model="showModal" width="auto">
+    <v-card min-width="320" class="!tw-rounded-[20px]">
+      <div class="text-center pa-4">
         <button class="tw-absolute tw-right-4 tw-top-6" @click="showModal = false">
           <img src="@/assets/images/svgs/close.svg" class="tw-w-3" alt="close icon" />
         </button>
@@ -33,10 +33,10 @@
             Upload Proof Of Payment
           </v-btn>
         </div>
-      </v-card>
-    </v-dialog>
-    <UpLoadFile v-model:show="showUploadModal" @uploadImageUrls="uploadedImage" />
-  </div>
+      </div>
+    </v-card>
+  </v-dialog>
+  <UpLoadFile v-model:show="showUploadModal" @uploadImageUrls="uploadedImage" />
 </template>
 
 <script setup lang="ts">

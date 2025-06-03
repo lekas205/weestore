@@ -1,7 +1,7 @@
 <template>
   <AppHeader title="Payment History" />
 
-  <div class="tw-h-[calc(100vh-9rem)] tw-flex tw-flex-col">
+  <div class="tw-h-[calc(100vh-9rem)] tw-flex tw-flex-col mt-5">
     <!-- <section
       class="tw-bg-white tw-flex tw-justify-between tw-rounded-tr-3xl tw-rounded-tl-3xl tw-p-4"
     >

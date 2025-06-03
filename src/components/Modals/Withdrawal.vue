@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center pa-4">
-    <v-dialog v-model="showModal" width="auto">
-      <v-card min-width="320" class="!tw-rounded-[20px]">
+  <v-dialog v-model="showModal" width="auto">
+    <v-card min-width="320" class="!tw-rounded-[20px]">
+      <div class="text-center pa-4">
         <div class="tw-px-5 my-5">
           <img src="@/assets/images/svgs/withdrawal.svg" alt="" class="tw-mx-auto" />
           <p class="text-center mb-3 mt-6">Withdraw to Bank Account</p>
@@ -18,18 +18,17 @@
             :maxLength="units"
           ></v-text-field>
         </div>
-
-        <template v-slot:actions>
-          <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#009930" @click="submit">
-            Withdraw</v-btn
-          >
-          <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#FA4A0C" @click="showModal = false">
-            Cancel</v-btn
-          >
-        </template>
-      </v-card>
-    </v-dialog>
-  </div>
+      </div>
+      <template v-slot:actions>
+        <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#009930" @click="submit">
+          Withdraw</v-btn
+        >
+        <v-btn class="!tw-h-[50px] !tw-rounded-full" color="#FA4A0C" @click="showModal = false">
+          Cancel</v-btn
+        >
+      </template>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script setup lang="ts">

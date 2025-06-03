@@ -8,7 +8,6 @@
           v-if="product?.images"
           :slidesPerView="'auto'"
           :centeredSlides="true"
-          :spaceBetween="70"
           :pagination="{
             clickable: true,
           }"
@@ -19,7 +18,7 @@
             <img
               :src="image.imageUrl"
               alt="Product Image"
-              class="tw-object-cover tw-mx-auto tw-h-[250px]"
+              class="tw-object-cover tw-mx-auto tw-h-[250px] tw-w-full"
             />
           </swiper-slide>
         </swiper>
@@ -97,7 +96,10 @@
             </div>
           </section>
 
-          <section class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6 mt-8">
+          <section
+            class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6 mt-8"
+            v-if="product.category != 'grocery'"
+          >
             <v-btn
               @click="showPocketModal = true"
               class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
@@ -254,9 +256,12 @@ watch(
 )
 </script>
 
-<style>
+<style scoped>
+.swiper {
+  height: 300px !important;
+}
 .swiper-slide {
-  height: 300px;
+  height: 250px;
 }
 
 .v-alert__content {

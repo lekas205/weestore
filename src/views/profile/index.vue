@@ -1,6 +1,6 @@
 <template>
   <AppHeader title="Profile" />
-  <div>
+  <div class="mt-5">
     <p class="tw-text-[18px] mb-3">Personal details</p>
 
     <div class="tw-bg-white tw-p-5 tw-flex tw-gap-5 tw-rounded-[22px]">

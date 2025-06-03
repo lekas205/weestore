@@ -1,6 +1,6 @@
 <template>
   <AppHeader />
-  <div class="tw-flex mt-2 tw-justify-between tw-gap-5">
+  <div class="tw-flex mt-2 tw-justify-between tw-gap-5 mt-5">
     <div
       v-for="tab in tabs"
       :key="tab"
@@ -16,6 +16,24 @@
 
   <PocketView v-if="activeTab === 'pocket'" />
   <RewardView v-else />
+
+  <swiper
+    :slidesPerView="'auto'"
+    :centeredSlides="true"
+    :pagination="{
+      clickable: true,
+    }"
+    :modules="[Pagination]"
+    class="mySwiper mt-10"
+  >
+    <swiper-slide>
+      <img
+        :src="'https://images.unsplash.com/photo-1734779205618-30ee0220f56f?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'"
+        alt="Product Image"
+        class="tw-object-cover tw-mx-auto tw-h-[250px] tw-w-full"
+      />
+    </swiper-slide>
+  </swiper>
 </template>
 
 <script setup lang="ts">
@@ -24,6 +42,8 @@ import PocketView from './components/PocketView.vue'
 import RewardView from './components/RewardView.vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import { useAuthStore } from '@/stores/auth'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Pagination } from 'swiper/modules'
 import { useTransactionStore } from '@/stores//transaction.ts'
 
 const authStore = useAuthStore()
@@ -42,3 +62,12 @@ onMounted(() => {
   getWalletBallance()
 })
 </script>
+
+<style scoped>
+.swiper {
+  height: 300px !important;
+}
+.swiper-slide {
+  height: 250px;
+}
+</style>

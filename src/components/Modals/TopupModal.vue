@@ -1,7 +1,7 @@
 <template>
-  <div class="text-center pa-4">
-    <v-dialog v-model="showModal" width="auto">
-      <v-card min-width="320" class="!tw-rounded-[20px]">
+  <v-dialog v-model="showModal" width="auto">
+    <v-card min-width="320" class="!tw-rounded-[20px]">
+      <div class="text-center pa-4">
         <button class="tw-absolute tw-right-4 tw-top-6" @click="showModal = false">
           <img src="@/assets/images/svgs/close.svg" class="tw-w-3" alt="close icon" />
         </button>
@@ -69,28 +69,28 @@
             </v-btn>
           </div>
         </section>
-      </v-card>
-    </v-dialog>
+      </div>
+    </v-card>
+  </v-dialog>
 
-    <UpLoadFile
-      v-model:show="showUploadModal"
-      @uploadImageUrls="uploadedImage"
-      @amount="saveAmount"
-      showAmount
-    />
-    <paystack-modal
-      id="paystack-topup-modal"
-      :amount="paystackData?.amount"
-      :email="paystackData?.email"
-      :publicKey="'pk_test_9e8d9cbc7f3a81655b977db8106a8c330010cf9d'"
-      :reference="paystackData?.reference"
-      :callback="paystackData?.callback_url"
-      :onSuccess="onSuccessfulPayment"
-      :onCancel="onCancelledPayment"
-      :embed="false"
-    >
-    </paystack-modal>
-  </div>
+  <UpLoadFile
+    v-model:show="showUploadModal"
+    @uploadImageUrls="uploadedImage"
+    @amount="saveAmount"
+    showAmount
+  />
+  <paystack-modal
+    id="paystack-topup-modal"
+    :amount="paystackData?.amount"
+    :email="paystackData?.email"
+    :publicKey="'pk_test_9e8d9cbc7f3a81655b977db8106a8c330010cf9d'"
+    :reference="paystackData?.reference"
+    :callback="paystackData?.callback_url"
+    :onSuccess="onSuccessfulPayment"
+    :onCancel="onCancelledPayment"
+    :embed="false"
+  >
+  </paystack-modal>
 </template>
 
 <script setup lang="ts">
