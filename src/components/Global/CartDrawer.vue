@@ -192,7 +192,9 @@ const createOrder = async () => {
         duration: 6000,
       })
       showDrawer.value = false
-      router.push('/home')
+      showOrderSuccess.value = true
+
+      // router.push('/home')
     }
   }
   loading.value = false

@@ -98,7 +98,7 @@
 
           <section
             class="tw-flex tw-flex-col tw-gap-5 mt-5 pb-6 mt-8"
-            v-if="product.category != 'grocery'"
+            v-if="product?.category?.toLowerCase() != 'grocery'"
           >
             <v-btn
               @click="showPocketModal = true"
