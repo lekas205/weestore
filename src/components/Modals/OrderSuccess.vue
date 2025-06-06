@@ -8,8 +8,8 @@
         <section class="tw-p-4 tw-mt-[40px] text-center">
           <h2 class="tw-font-semibold tw-text-[25px]">Order Received</h2>
           <p class="my-3 tw-text-center">
-            Please check the 'My Products' section after 5 minutes to verify the status of your
-            transaction. Or Contact Admin for further Assistance.
+            It will appear under "My Products" once payment is confirmed by the admin. Please check
+            again in 5 minutes or contact support at <u>+2348106476364</u> for assistance.
           </p>
           <!-- <p>+2348128392001</p> -->
         </section>

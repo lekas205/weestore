@@ -60,7 +60,7 @@
 
       <li class="tw-bg-white tw-p-5 tw-rounded-[20px] tw-text-[18px] tw-relative">
         <a
-          href="https://wa.me/2348136018432"
+          href="https://wa.me/2348106476364"
           target="_blank"
           rel="noopener"
           class="tw-w-full tw-block"
