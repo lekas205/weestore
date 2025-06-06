@@ -186,11 +186,13 @@ const AddToCart = async () => {
     productId: props.product.product_id,
   })
 
-  if (res) {
+  if (res?.success) {
     toast.success('Product added to cart', {
       position: 'top',
       duration: 6000,
     })
+
+    showDrawer.value = false
   }
 
   loading.value = false
