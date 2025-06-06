@@ -11,6 +11,8 @@
         <div class="mb-6">
           <input
             placeholder="Search"
+            @keyup="searchProduct"
+            v-model="search"
             class="tw-px-10 tw-py-4 tw-w-full tw-text-[20px] tw-rounded-full tw-shadow-lg tw-bg-white !tw-outline-primary"
           />
         </div>
@@ -35,6 +37,7 @@
 </template>
 
 <script setup lang="ts">
+import __ from 'lodash'
 import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { Products } from '@/types'
@@ -47,7 +50,10 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
 const productStore = useProductsStore()
 const { products, categories } = storeToRefs(productStore)
+
+const search = ref('')
 const showDetails = ref(false)
+const categoryId = ref()
 const productDetails = ref<Products>({} as Products)
 
 const showProductDetails = (product: Products) => {
@@ -55,24 +61,31 @@ const showProductDetails = (product: Products) => {
   showDetails.value = true
 }
 
-const fetchCategories = async () => {
-  const categoryId = categories.value.find((elm) => elm.name.toLowerCase() === 'groceries')?.id
-  if (categoryId) {
+const fetchProducts = async () => {
+  categoryId.value = categories.value.find((elm) => elm.name.toLowerCase() === 'groceries')?.id
+  if (categoryId.value) {
     authStore.toggleLoader()
     await productStore.fetchProducts({
-      categoryId: categoryId,
+      categoryId: categoryId.value,
+      search: search.value,
     })
     authStore.toggleLoader()
   }
 }
 
+const searchProduct = __.debounce(async function () {
+  authStore.toggleLoader()
+  fetchProducts()
+  authStore.toggleLoader()
+}, 500)
+
 onMounted(async () => {
   if (categories.value.length) {
-    fetchCategories()
+    fetchProducts()
   } else {
     authStore.toggleLoader()
     await productStore.fetchCategories()
-    fetchCategories()
+    fetchProducts()
     authStore.toggleLoader()
   }
 })

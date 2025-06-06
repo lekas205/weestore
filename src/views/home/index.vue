@@ -91,6 +91,7 @@ const { products, categories } = storeToRefs(productStore)
 const tab = ref('')
 const loading = ref(false)
 const showDetails = ref(false)
+const searched = ref(false)
 const productDetails = ref<Products>({} as Products)
 
 const search = ref('')
@@ -111,7 +112,7 @@ watch(tab, async (newTab, oldTab) => {
 })
 
 const convertedCategories = computed(() => {
-  return search.value.length
+  return search.value.length && searched.value
     ? products.value
         .map((product) => {
           if (product.category.toLowerCase() != 'groceries') {
@@ -126,7 +127,7 @@ const convertedCategories = computed(() => {
 })
 
 const convertedProducts = computed(() => {
-  return convertedCategories.value.length && search.value.length
+  return convertedCategories.value.length && searched.value
     ? products.value.filter((product) => product.category_id === convertedCategories.value[0].id)
     : products.value
 })
@@ -152,6 +153,12 @@ const searchProduct = __.debounce(async function () {
     await productStore.fetchProducts({
       search: search.value,
     })
+
+    if (search.value.length > 0) {
+      searched.value = true
+    } else {
+      searched.value = false
+    }
   } else {
     await fetchData()
   }
