@@ -50,7 +50,7 @@ export async function handleFileUpload(files: File[]): Promise<string[] | null> 
       const command = new PutObjectCommand(payload)
       try {
         await bucket.send(command)
-        urls.push(`https://fajo-bc.s3.amazonaws.com/${payload.Key}`)
+        urls.push(`https://weestore-bc.s3.amazonaws.com/${payload.Key}`)
       } catch (error) {
         console.log(error)
       }
