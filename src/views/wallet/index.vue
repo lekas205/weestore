@@ -20,15 +20,12 @@
   <swiper
     :slidesPerView="'auto'"
     :centeredSlides="true"
-    :pagination="{
-      clickable: true,
-    }"
     :modules="[Pagination]"
     class="mySwiper mt-10"
   >
-    <swiper-slide>
+    <swiper-slide v-for="(image, index) in bannerImages" :key="index">
       <img
-        :src="'https://images.unsplash.com/photo-1734779205618-30ee0220f56f?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'"
+        :src="imagePath(image)"
         alt="Product Image"
         class="tw-object-cover tw-mx-auto tw-h-[250px] tw-w-full"
       />
@@ -49,6 +46,11 @@ import { useTransactionStore } from '@/stores//transaction.ts'
 const authStore = useAuthStore()
 const transactionStore = useTransactionStore()
 
+const bannerImages = ['wallet-banner-1', 'wallet-banner-2', 'wallet-banner-3']
+
+const imagePath = (path: string) => {
+  return new URL(`../../assets/images/png/${path}.jpeg`, import.meta.url).href
+}
 const tabs = ref(['pocket', 'reward'])
 const activeTab = ref('pocket')
 

@@ -1,17 +1,23 @@
 <template>
   <div>
     <AppHeader />
-    <template v-if="products.length">
+    <template v-if="products.length || search.length">
+      <swiper :slidesPerView="'auto'" :centeredSlides="true" class="mySwiper mt-6">
+        <swiper-slide>
+          <img
+            src="@/assets/images/png/groceries-banner.png"
+            alt="Product Image"
+            class="tw-object-cover tw-mx-auto tw-h-[70px] tw-w-full"
+          />
+        </swiper-slide>
+      </swiper>
       <div class="mt-5">
-        <h1 class="tw-text-[34px] mb-4">
-          Explore our <br />
-          Farm Produce
-        </h1>
+        <!-- <h1 class="tw-text-[34px] mb-4">Explore Our <br />Monthly Food Sharing</h1> -->
 
         <div class="mb-6">
           <input
             placeholder="Search"
-            @keyup="searchProduct"
+            @keyup="searchGroceries"
             v-model="search"
             class="tw-px-10 tw-py-4 tw-w-full tw-text-[20px] tw-rounded-full tw-shadow-lg tw-bg-white !tw-outline-primary"
           />
@@ -24,8 +30,20 @@
         </v-col>
       </v-row>
 
+      <div
+        class="tw-flex tw-flex-col tw-items-center tw-justify-center my-auto tw-h-[40vh]"
+        v-if="!products.length && search.length"
+      >
+        <img src="@/assets/images/svgs/gift.svg" alt="" width="150px" />
+        <h2 class="tw-text-[28px] mt-4 mb-3">No Result</h2>
+        <p class="tw-w-[90%] text-center mx-auto tw-text-[17px] tw-opacity-50">
+          The is no product that match your search keyword.
+        </p>
+      </div>
+
       <ProductDetails v-model:show="showDetails" :product="productDetails" />
     </template>
+
     <div class="tw-flex tw-flex-col tw-items-center tw-justify-center my-auto tw-h-[75vh]" v-else>
       <img src="@/assets/images/svgs/gift.svg" alt="" width="150px" />
       <h2 class="tw-text-[28px] mt-4 mb-3">No Groceries created yet</h2>
@@ -41,6 +59,7 @@ import __ from 'lodash'
 import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { Products } from '@/types'
+import { Swiper, SwiperSlide } from 'swiper/vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import ProductCard from '@/components/Global/ProductCard.vue'
 import ProductDetails from '@/components/Global/ProductDetails.vue'
@@ -73,7 +92,7 @@ const fetchProducts = async () => {
   }
 }
 
-const searchProduct = __.debounce(async function () {
+const searchGroceries = __.debounce(async function () {
   authStore.toggleLoader()
   fetchProducts()
   authStore.toggleLoader()
@@ -90,3 +109,11 @@ onMounted(async () => {
   }
 })
 </script>
+<style scoped>
+.swiper {
+  height: 70px !important;
+}
+.swiper-slide {
+  height: 250px;
+}
+</style>

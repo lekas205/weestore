@@ -29,7 +29,7 @@
               class="tw-flex tw-font-bold ttw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
             >
               <router-link to="/groceries" class="tw-flex">
-                <img src="@/assets/images/svgs/shopping-cart.svg" alt="Order Icon" class="mr-5" />
+                <img src="@/assets/images/svgs/groceries.svg" alt="Order Icon" class="mr-5" />
                 Groceries
               </router-link>
             </li>
@@ -53,7 +53,7 @@
               class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
             >
               <router-link to="/wallet" class="tw-flex">
-                <img src="@/assets/images/svgs/tag.svg" alt="Order Icon" class="mr-5" /> My Wallet
+                <img src="@/assets/images/svgs/note.svg" alt="Order Icon" class="mr-5" /> My Wallet
               </router-link>
             </li>
 
