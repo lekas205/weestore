@@ -2,7 +2,15 @@
   <div>
     <AppHeader />
     <div class="mt-5">
-      <h1 class="tw-text-[34px] mb-4">Explore Our <br />Monthly Food Sharing</h1>
+      <img
+        src="@/assets/images/png/restock-banner.png"
+        alt="Product Image"
+        class="tw-object-cover tw-mx-auto tw-h-[70px] tw-w-full mb-4"
+      />
+      <!-- <h1 class="tw-text-[34px] mb-4">
+        Fast Selling <br />
+        FMCG for you
+      </h1> -->
 
       <div class="mb-6">
         <input
@@ -61,7 +69,7 @@
         v-if="!convertedCategories.length"
       >
         <img src="@/assets/images/svgs/gift.svg" alt="" width="150px" />
-        <h2 class="tw-text-[28px] mt-4 mb-3">No PResult</h2>
+        <h2 class="tw-text-[28px] mt-4 mb-3">No Result</h2>
         <p class="tw-w-[90%] text-center mx-auto tw-text-[17px] tw-opacity-50">
           The is no product that match your search keyword.
         </p>
@@ -160,6 +168,7 @@ const searchProduct = __.debounce(async function () {
       searched.value = false
     }
   } else {
+    searched.value = false
     await fetchData()
   }
 

@@ -242,7 +242,7 @@ const transferToBank = async (unit: number | string) => {
 
 const alertDescription = computed(() => {
   return props.isPurchased
-    ? `Quantity bought into your warehouse is ${props.product.quantity}`
+    ? `Quantity bought is ${props.product.quantity}`
     : ` Minimun quantity is ${props.product?.min_quantity} and maximum quantity is
             ${props.product.max_quantity}`
 })
