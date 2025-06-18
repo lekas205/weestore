@@ -43,7 +43,7 @@
               item-title="name"
               item-value="code"
               v-model="form.state"
-              :items="states"
+              :items="activeState"
               :return-object="false"
             ></v-combobox>
           </v-col>
@@ -140,7 +140,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth.ts'
 import type { registerDTO } from '@/types/dto'
 import { ROUTES } from '@/router/routes/routes'
@@ -176,6 +176,10 @@ const referralOptions = ref([
   { value: 'whatsapp', name: 'WhatsApp' },
   { value: 'referral', name: 'Referral' },
 ])
+
+const activeState = computed(() => {
+  return states.value.filter((state: any) => state.name.toLowerCase() == 'lagos')
+})
 
 watch(
   () => form.value.state,

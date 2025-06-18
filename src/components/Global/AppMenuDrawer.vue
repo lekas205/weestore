@@ -19,14 +19,14 @@
           <h6 class="tw-font-bold tw-text-[20px]">Hi {{ firstName }}</h6>
           <ul class="tw-my-auto">
             <li
-              class="tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+              class="tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light hover:tw-opacity-80"
             >
               <router-link to="/home" class="tw-flex">
                 <img src="@/assets/images/svgs/sheild.svg" alt="Order Icon" class="mr-5" /> Restock
               </router-link>
             </li>
             <li
-              class="tw-flex tw-font-bold ttw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+              class="tw-flex tw-font-bold ttw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light hover:tw-opacity-80"
             >
               <router-link to="/groceries" class="tw-flex">
                 <img src="@/assets/images/svgs/groceries.svg" alt="Order Icon" class="mr-5" />
@@ -34,7 +34,7 @@
               </router-link>
             </li>
             <li
-              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light hover:tw-opacity-80"
             >
               <router-link to="/products" class="tw-flex">
                 <img src="@/assets/images/svgs/shopping-cart.svg" alt="Order Icon" class="mr-5" />
@@ -42,7 +42,7 @@
               </router-link>
             </li>
             <li
-              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light hover:tw-opacity-80"
             >
               <router-link to="/payment-history" class="tw-flex">
                 <img src="@/assets/images/svgs/tag.svg" alt="Order Icon" class="mr-5" />Payment
@@ -50,7 +50,7 @@
               </router-link>
             </li>
             <li
-              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light hover:tw-opacity-80"
             >
               <router-link to="/wallet" class="tw-flex">
                 <img src="@/assets/images/svgs/note.svg" alt="Order Icon" class="mr-5" /> My Wallet
@@ -58,7 +58,7 @@
             </li>
 
             <li
-              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light"
+              class="tw-flex tw-font-bold tw-text-[16px] py-6 tw-items-center tw-border-b-[0.3px] tw-border-light hover:tw-opacity-80"
             >
               <router-link to="/profile" class="tw-flex">
                 <img src="@/assets/images/svgs/user-circle.svg" alt="Order Icon" class="mr-5" />
@@ -67,7 +67,10 @@
             </li>
           </ul>
 
-          <button class="tw-text-[20px] tw-font-bold tw-self-start" @click="logout">
+          <button
+            class="tw-text-[20px] tw-font-bold tw-self-start hover:tw-opacity-80"
+            @click="logout"
+          >
             Sign-out
           </button>
         </section>
@@ -115,3 +118,5 @@ const logout = () => {
   router.push('/login')
 }
 </script>
+
+<style scoped></style>

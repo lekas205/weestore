@@ -230,7 +230,7 @@ watch(
 )
 </script>
 
-<style>
+<style scoped>
 .swiper-slide {
   height: 300px;
 }

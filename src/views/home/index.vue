@@ -2,11 +2,16 @@
   <div>
     <AppHeader />
     <div class="mt-5">
-      <img
-        src="@/assets/images/png/restock-banner.png"
-        alt="Product Image"
-        class="tw-object-cover tw-mx-auto tw-h-[70px] tw-w-full mb-4"
-      />
+      <swiper :slidesPerView="'auto'" :centeredSlides="true" class="my-6">
+        <swiper-slide>
+          <img
+            src="@/assets/images/png/restock-banner.png"
+            alt="Product Image"
+            class="tw-object-cover tw-mx-auto tw-h-[70px] tw-w-full mb-4"
+          />
+        </swiper-slide>
+      </swiper>
+
       <!-- <h1 class="tw-text-[34px] mb-4">
         Fast Selling <br />
         FMCG for you
@@ -36,7 +41,8 @@
         <v-tab-item v-if="tab === category.id">
           <swiper
             :slidesPerView="2"
-            :spaceBetween="70"
+            :spaceBetween="20"
+            :loop="true"
             :autoplay="{
               delay: 2500,
               disableOnInteraction: false,
@@ -187,10 +193,10 @@ onMounted(async () => {
   margin-bottom: 30px !important;
 }
 
-.swiper {
+.mySwiper.swiper {
   height: 400px;
 }
 .product-slide {
-  width: 200px;
+  width: 200px !important;
 }
 </style>

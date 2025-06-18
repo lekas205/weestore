@@ -43,7 +43,7 @@
           <section class="tw-p-4 tw-mt-[40px]">
             <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
               <p>Account Number</p>
-              <p>223900299320</p>
+              <p>5601496101</p>
             </div>
             <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
               <p>Bank Name</p>
@@ -51,12 +51,12 @@
             </div>
             <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
               <p>Account name</p>
-              <p>TechClouthe Lab</p>
+              <p>WEESTORE NIGERIA LIMITED</p>
             </div>
           </section>
 
           <section class="text-center tw-px-5 tw-text-primary">
-            It takes 12 Hours to confirm Payment made through this channel
+            It takes 30 minutes to confirm Payment made through this channel
           </section>
 
           <div class="text-center">
