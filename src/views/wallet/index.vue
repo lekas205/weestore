@@ -24,11 +24,7 @@
     class="mySwiper mt-10"
   >
     <swiper-slide v-for="(image, index) in bannerImages" :key="index">
-      <img
-        :src="imagePath(image)"
-        alt="Product Image"
-        class="tw-object-cover tw-mx-auto tw-h-[250px] tw-w-full"
-      />
+      <img :src="imagePath(image)" alt="Product Image" class="tw-object-contain tw-w-full" />
     </swiper-slide>
   </swiper>
 </template>
