@@ -18,7 +18,7 @@
         class="tw-bg-white tw-rounded-xl tw-p-3 text-center tw-shadow-md tw-w-[47%] tw-flex tw-flex-col tw-h-[110px] tw-justify-center"
         v-for="(item, index) in actions"
         :key="index"
-        @click="item.value === 'withdrawal' ? (showWithdrawal = true) : (showPocketModal = true)"
+        @click="item.value === 'withdrawal' ? withdrawToBank() : (showPocketModal = true)"
       >
         <img :src="extractImgUrl(item.icon)" alt="" class="mx-auto" />
         <p class="tw-text-primary mt-2">{{ item.label }}</p>
@@ -39,6 +39,15 @@ import Withdrawal from '@/components/Modals/Withdrawal.vue'
 import PocketTransfer from '@/components/Modals/PocketTransfer.vue'
 import { useAuthStore } from '@/stores/auth'
 import { useToast } from 'vue-toast-notification'
+import { useRouter } from 'vue-router'
+import { ROUTES } from '@/router/routes/routes'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+
+const router = useRouter()
+
+const { profile } = storeToRefs(userStore)
 
 const toast = useToast()
 const authStore = useAuthStore()
@@ -80,6 +89,16 @@ const transferToPocket = async (amount: string | number) => {
   }
 
   authStore.toggleLoader()
+}
+const withdrawToBank = () => {
+  if (!profile.value.bank.accountName) {
+    toast.success('Please Add your bank details to proceed with withdrawal', {
+      position: 'top',
+      duration: 6000,
+    })
+    return router.push({ name: ROUTES.profile.name, query: { bank_account: 'true' } })
+  }
+  showWithdrawal.value = true
 }
 
 const transferToBank = async (amount: string | number) => {

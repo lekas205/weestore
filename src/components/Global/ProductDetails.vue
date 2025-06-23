@@ -110,7 +110,7 @@
             </v-btn>
 
             <v-btn
-              @click="showWithdrawal = true"
+              @click="withdrawToBank"
               class="tw-mt-auto !tw-h-[70px] !tw-text-[14px] !tw-leading-6 !tw-rounded-full"
               color="#fa4b0c5b"
             >
@@ -147,12 +147,21 @@ import { useToast } from 'vue-toast-notification'
 import { TRANSACTION_TYPES } from '@/utils/constants'
 import { useAuthStore } from '@/stores/auth'
 import { useProductsStore } from '@/stores/products.ts'
+import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+import { useRouter } from 'vue-router'
+import { ROUTES } from '@/router/routes/routes'
 
 const productStore = useProductsStore()
 const toast = useToast()
 const cartStore = useCartStore()
 const authStore = useAuthStore()
+const userStore = useUserStore()
 const transactionStore = useTransactionStore()
+
+const router = useRouter()
+
+const { profile } = storeToRefs(userStore)
 
 const props = defineProps<{
   show: boolean
@@ -178,6 +187,17 @@ const showDrawer = computed({
 
 const showWithdrawal = ref(false)
 const showPocketModal = ref(false)
+
+const withdrawToBank = () => {
+  if (!profile.value.bank.accountName) {
+    toast.success('Please Add your bank details to proceed with withdrawal', {
+      position: 'top',
+      duration: 6000,
+    })
+    return router.push({ name: ROUTES.profile.name, query: { bank_account: 'true' } })
+  }
+  showWithdrawal.value = true
+}
 
 const AddToCart = async () => {
   loading.value = true

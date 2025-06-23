@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { API } from '../services'
 import { AxiosError } from 'axios'
@@ -21,10 +21,8 @@ export const useAuthStore = defineStore('auth', () => {
   const userStore = useUserStore()
 
   const loader = ref(false)
-  const count = ref(0)
   const states = ref<string[]>([])
   const stores = ref<string[]>([])
-  const doubleCount = computed(() => count.value * 2)
 
   async function initiateLogin(payload: loginDTO): Promise<APIResponse | void> {
     try {
@@ -215,7 +213,6 @@ export const useAuthStore = defineStore('auth', () => {
     states,
     stores,
     loader,
-    doubleCount,
     toggleLoader,
     setNewPin,
     changeNumber,

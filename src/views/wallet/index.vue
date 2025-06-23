@@ -45,7 +45,7 @@ const transactionStore = useTransactionStore()
 const bannerImages = ['wallet-banner-1', 'wallet-banner-2', 'wallet-banner-3']
 
 const imagePath = (path: string) => {
-  return new URL(`../../assets/images/png/${path}.jpeg`, import.meta.url).href
+  return new URL(`../../assets/images/png/${path}.png`, import.meta.url).href
 }
 const tabs = ref(['pocket', 'reward'])
 const activeTab = ref('pocket')

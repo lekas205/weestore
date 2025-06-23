@@ -92,7 +92,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import ChangePin from '@/components/Modals/ChangePin.vue'
@@ -103,8 +103,10 @@ import { useUserStore } from '@/stores/user.ts'
 import { useAuthStore } from '@/stores/auth.ts'
 import { useToast } from 'vue-toast-notification'
 import DeleteAccount from '@/components/Modals/DeleteAccount.vue'
+import { useRoute } from 'vue-router'
 
 const toast = useToast()
+const route = useRoute()
 const router = useRouter()
 const authStore = useAuthStore()
 const userStore = useUserStore()
@@ -156,4 +158,12 @@ const logout = () => {
 
   router.push('/login')
 }
+
+onMounted(() => {
+  if (route.query.bank_account) {
+    setTimeout(() => {
+      showBankAccount.value = true
+    }, 2500)
+  }
+})
 </script>
