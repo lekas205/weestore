@@ -71,7 +71,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
-  (e: 'uploadImageUrls', urls: string[]): void
+  (e: 'uploadImageUrls', urls: any[]): void
   (e: 'amount', value: string): void
 }>()
 
@@ -114,10 +114,10 @@ function handleFilePreview(file: CustomFile) {
 
 const proceedToUpload = async () => {
   loading.value = true
-  const urls = await handleFileUpload([...files.value])
+  // const urls = await handleFileUpload([...files.value])
 
-  if (urls) {
-    emit('uploadImageUrls', urls)
+  if (files.value) {
+    emit('uploadImageUrls', files.value)
   }
   loading.value = false
 }

@@ -141,11 +141,13 @@ const amount = ref()
 
 const proceed = async () => {
   authStore.toggleLoader()
-  const res = await transactionStore.walletTopup({
-    amount: amount.value,
-    paymentMethod: activeTab.value.toUpperCase(),
-    paymentUrl: paymentProof.value[0],
-  })
+
+  const formData = new FormData()
+  formData.append('amount', amount.value)
+  formData.append('paymentMethod', activeTab.value.toUpperCase())
+  formData.append('paymentUrl', paymentProof.value[0] || '')
+
+  const res = await transactionStore.walletTopup(formData)
 
   if (res?.success && activeTab.value === 'paystack') {
     paystackData.value = res.payload
