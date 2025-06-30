@@ -22,7 +22,9 @@
       }"
     />
     <div class="">
-      <p class="tw-text-[22px] mt-5 mx-auto tw-leading-7 tw-mb-2">{{ product?.product_name }}</p>
+      <p class="tw-text-[19px] mt-5 mx-auto tw-leading-7 tw-mb-2 tw-truncate tw-w-[150px]">
+        {{ product?.product_name }}
+      </p>
       <p class="tw-text-primary tw-text-[17px]">{{ formatAsMoney(product.price) }}</p>
       <p class="tw-text-success tw-mt-2 tw-text-[17px]">Available</p>
     </div>

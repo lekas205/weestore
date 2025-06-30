@@ -24,8 +24,8 @@
         </div>
       </div>
 
-      <v-row>
-        <v-col cols="6" v-for="(prod, index) in products" :key="index">
+      <v-row gutter="20">
+        <v-col cols="6" v-for="(prod, index) in products" :key="index" class="!tw-p-2">
           <ProductCard size="small" :product="prod" @show-product-details="showProductDetails" />
         </v-col>
       </v-row>

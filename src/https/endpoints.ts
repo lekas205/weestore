@@ -1,5 +1,5 @@
 const customer = '/customer'
-const bank = '/bank-account'
+const bank = '/v1/bank-account'
 
 export const CART = `/v1${customer}/cart`
 export const ORDER = `/v1${customer}/order`
