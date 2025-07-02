@@ -109,7 +109,7 @@ const transferToBank = async (amount: string | number) => {
 
   if (res) {
     await transactionStore.getWalletBalance()
-    toast.success('Transfer to Bank request has been sent', {
+    toast.success('Your withdrawal Request is submitted and will be processed within 24hrs', {
       position: 'top',
       duration: 6000,
     })
