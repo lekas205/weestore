@@ -25,8 +25,8 @@ export const BANK_LIST = `${bank}/supported-banks`
 export const ADD_BANK_ACCOUNT = `/v1${customer}/add-bank-account`
 export const UPDATE_BANK_ACCOUNT = `/v1${customer}/update-bank-account`
 
-export const STATE = `utility/states`
-export const STORE = `utility/state/store/`
+export const STATE = `/v1/utility/states`
+export const STORE = `/v1/utility/state/store/`
 
 export const WALLET = `/v1${customer}/wallet`
 export const TRANSFER_POCKET = `/v1${customer}/transfer`
