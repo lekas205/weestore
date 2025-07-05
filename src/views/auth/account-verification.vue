@@ -1,4 +1,7 @@
 <template>
+  <button class="tw-text-white tw-absolute tw-top-5 tw-left-4d" @click="router.back()">
+    <v-icon icon="mdi-chevron-left" class="!tw-text-[40px]"></v-icon>
+  </button>
   <div class="rtw-elative tw-mt-[-40px] tw-z-10 tw-h-full tw-flex tw-flex-col">
     <h3 class="tw-text-white tw-text-center tw-text-[18px]">Account Verification</h3>
     <section class="tw-text-center tw-mt-[80px]">
