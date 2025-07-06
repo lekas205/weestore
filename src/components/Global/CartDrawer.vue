@@ -88,7 +88,7 @@
         :amount="paystackData?.amount"
         :email="paystackData?.email"
         buttonText="Pay Online"
-        :publicKey="'pk_test_9e8d9cbc7f3a81655b977db8106a8c330010cf9d'"
+        :publicKey="paystackPublicKey"
         :reference="paystackData?.reference"
         :callback="paystackData?.callback"
         :onSuccess="onSuccessfulPayment"
@@ -131,6 +131,8 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
 }>()
+
+const paystackPublicKey = computed(() => import.meta.env.VITE_PAYSTACK_PUBLIC_KEY)
 
 const loading = ref(false)
 const showOrderSuccess = ref(false)
@@ -181,8 +183,20 @@ const createOrder = async () => {
     ...form.value,
     cartId: cartItems.value.cart_id,
   }
+
+  const formData = new FormData()
+  formData.append('paymentMethod', form.value.paymentMethod)
+  formData.append('address', form.value.address)
+  formData.append('cartId', cartItems.value.cart_id)
+
+  if (form.value.paymentProof && form.value.paymentMethod === 'BANK') {
+    formData.append('paymentProof', form.value.paymentProof || '')
+  }
+
   loading.value = true
-  const response = await cartStore.createOrder(payload)
+  const response = await cartStore.createOrder(
+    form.value.paymentMethod === 'BANK' ? formData : payload,
+  )
   if (response) {
     if (form.value.paymentMethod === 'PAYSTACK') {
       handlePaystackPayment(response.payload)

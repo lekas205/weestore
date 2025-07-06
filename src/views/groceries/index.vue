@@ -44,7 +44,10 @@
       <ProductDetails v-model:show="showDetails" :product="productDetails" />
     </template>
 
-    <div class="tw-flex tw-flex-col tw-items-center tw-justify-center my-auto tw-h-[75vh]" v-else>
+    <div
+      class="tw-flex tw-flex-col tw-items-center tw-justify-center my-auto tw-h-[75vh] text-center"
+      v-else
+    >
       <img src="@/assets/images/svgs/gift.svg" alt="" width="150px" />
       <h2 class="tw-text-[28px] mt-4 mb-3">No Groceries created yet</h2>
       <p class="text-center mx-auto tw-text-[17px] tw-opacity-50">

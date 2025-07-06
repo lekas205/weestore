@@ -36,7 +36,11 @@
         </p>
       </div>
 
-      <v-btn class="!tw-h-[70px] !tw-rounded-full mt-auto" color="primary">
+      <v-btn
+        class="!tw-h-[70px] !tw-rounded-full mt-auto"
+        color="primary"
+        @click="router.push('/home')"
+      >
         Continue Ordering</v-btn
       >
     </template>
@@ -46,13 +50,14 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import AppHeader from '@/components/Global/AppHeader.vue'
-
+import { useRouter } from 'vue-router'
 import { useTransactionStore } from '@/stores//transaction.ts'
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { formatAsMoney, formatDate } from '@/utils/helpers'
 
 const authStore = useAuthStore()
+const router = useRouter()
 const transactionStore = useTransactionStore()
 const { transactions } = storeToRefs(transactionStore)
 
