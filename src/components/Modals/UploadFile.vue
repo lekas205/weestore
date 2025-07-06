@@ -58,7 +58,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useToast } from 'vue-toast-notification'
-import { handleFileUpload } from '@/utils/helpers'
+// import { handleFileUpload } from '@/utils/helpers'
 
 interface CustomFile extends File {
   src?: string
@@ -90,8 +90,6 @@ const files = ref<CustomFile[]>([])
 
 function saveFileToLocal(event: any): void {
   const file: File = event.target.files[0]
-  console.log(file)
-
   if (!file) return
 
   handleFilePreview(file)

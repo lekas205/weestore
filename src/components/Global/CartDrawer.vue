@@ -210,6 +210,7 @@ const createOrder = async () => {
 
       // router.push('/home')
     }
+    cartStore.fetchCartItems()
   }
   loading.value = false
 }

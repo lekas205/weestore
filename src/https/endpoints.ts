@@ -2,7 +2,7 @@ const customer = '/customer'
 const bank = '/v1/bank-account'
 
 export const CART = `/v1${customer}/cart`
-export const ORDER = `/v1${customer}/order`
+export const ORDER = `/v2${customer}/order`
 
 export const LOGIN = `/v1${customer}/login`
 export const REGISTER = `/v1${customer}/register`
