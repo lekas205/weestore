@@ -207,10 +207,8 @@ const createOrder = async () => {
       })
       showDrawer.value = false
       showOrderSuccess.value = true
-
-      // router.push('/home')
+      cartStore.fetchCartItems()
     }
-    cartStore.fetchCartItems()
   }
   loading.value = false
 }
@@ -226,6 +224,8 @@ const onSuccessfulPayment = () => {
   cartStore.fetchCartItems()
   showDrawer.value = false
   showOrderSuccess.value = true
+
+  cartStore.fetchCartItems()
 }
 
 const onCancelledPayment = () => {
