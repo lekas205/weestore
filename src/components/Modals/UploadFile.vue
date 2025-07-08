@@ -85,7 +85,7 @@ const emit = defineEmits<{
 }>()
 
 const exceedFileSize = ref(false)
-const reRender = ref(1)
+const reRender = ref<any>(1)
 
 const showModal = computed({
   get() {

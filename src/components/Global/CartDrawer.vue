@@ -216,7 +216,7 @@ const createOrder = async () => {
   authStore.toggleLoader()
 
   const response = await cartStore.createOrder(formData)
-  if (response.success) {
+  if (response?.success) {
     toast.success('Order created successfully', {
       position: 'top',
       duration: 6000,
@@ -248,9 +248,8 @@ const onCancelledPayment = () => {
 
 const getPaystackReference = async () => {
   const data = await transactionStore.getPaystackReference(String(total.value))
-  if (data.success) {
-    console.log(data.payload)
-    paystackData.value = data.payload
+  if (data?.success) {
+    paystackData.value = data?.payload
   }
 }
 
