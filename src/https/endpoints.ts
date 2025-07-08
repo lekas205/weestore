@@ -38,3 +38,4 @@ export const REWARDS_TRANSFER_TO_POCKET = `/v1${customer}/reward/transfer`
 export const REWARDS_TRANSFER_TO_BANK = `/v1${customer}/reward/withdraw`
 
 export const DELETE_ACCOUNT = `/v1${customer}`
+export const PAYMENT_REFERENCE = `/v1${customer}/order/reference`

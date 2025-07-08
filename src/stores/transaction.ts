@@ -99,6 +99,22 @@ export const useTransactionStore = defineStore('transactions', () => {
     }
   }
 
+  async function getPaystackReference(amount: string): Promise<APIResponse | void> {
+    try {
+      const { status, data } = await API.transactions.getPaystackReference({ amount })
+
+      if (status === 200 || status === 201) {
+        return {
+          success: true,
+          payload: data.payload,
+        }
+      }
+    } catch (error) {
+      const _error = error as AxiosError
+      handleStoreRequestError(_error)
+    }
+  }
+
   async function rewardsTransferToPocket(
     payload: rewardsTransferToPocketDTO,
   ): Promise<APIResponse | void> {
@@ -143,6 +159,7 @@ export const useTransactionStore = defineStore('transactions', () => {
     getWalletBalance,
     transferToBank,
     transferToPocket,
+    getPaystackReference,
     rewardsTransferToBank,
     rewardsTransferToPocket,
   }

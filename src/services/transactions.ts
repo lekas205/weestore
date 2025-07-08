@@ -35,6 +35,10 @@ async function rewardsTransferToBank(payload: rewardsTransferToBankDTO) {
   return await http.post<APIResponse>(ENDPOINTS.REWARDS_TRANSFER_TO_BANK, payload)
 }
 
+async function getPaystackReference(payload: { amount: string }) {
+  return await http.post<APIResponse>(ENDPOINTS.PAYMENT_REFERENCE, payload)
+}
+
 export default {
   walletTopup,
   transactions,
@@ -42,5 +46,6 @@ export default {
   transferToBank,
   transferToPocket,
   rewardsTransferToBank,
+  getPaystackReference,
   rewardsTransferToPocket,
 }

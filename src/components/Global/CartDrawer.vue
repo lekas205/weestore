@@ -51,7 +51,7 @@
             <v-btn
               class="tw-mt-auto !tw-h-[50px] tw-w-full !tw-rounded-full"
               color="primary"
-              @click="createOrder"
+              @click="initiateOrder"
               :loading="loading"
             >
               Complete Order</v-btn
@@ -113,6 +113,7 @@ import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toast-notification'
 import { useAuthStore } from '@/stores/auth'
 import { useUserStore } from '@/stores/user.ts'
+import { useTransactionStore } from '@/stores/transaction.ts'
 
 const userStore = useUserStore()
 
@@ -120,6 +121,7 @@ const authStore = useAuthStore()
 const router = useRouter()
 const toast = useToast()
 const cartStore = useCartStore()
+const transactionStore = useTransactionStore()
 
 const { profile } = storeToRefs(userStore)
 const { cartItems } = storeToRefs(cartStore)
@@ -178,11 +180,25 @@ const deleteItem = async (itemId: string) => {
   authStore.toggleLoader()
 }
 
-const createOrder = async () => {
-  const payload = {
-    ...form.value,
-    cartId: cartItems.value.cart_id,
+const initiateOrder = async () => {
+  if (form.value.paymentMethod === 'PAYSTACK') {
+    loading.value = true
+    await getPaystackReference()
+    setTimeout(() => {
+      document.getElementById('paystack-modal')?.click()
+    }, 1000)
+
+    loading.value = false
+  } else {
+    createOrder()
   }
+}
+
+const createOrder = async () => {
+  // const payload = {
+  //   ...form.value,
+  //   cartId: cartItems.value.cart_id,
+  // }
 
   const formData = new FormData()
   formData.append('paymentMethod', form.value.paymentMethod)
@@ -193,39 +209,34 @@ const createOrder = async () => {
     formData.append('paymentProof', form.value.paymentProof || '')
   }
 
-  loading.value = true
-  const response = await cartStore.createOrder(
-    form.value.paymentMethod === 'BANK' ? formData : payload,
-  )
-  if (response) {
-    if (form.value.paymentMethod === 'PAYSTACK') {
-      handlePaystackPayment(response.payload)
-    } else {
-      toast.success('Order created successfully', {
-        position: 'top',
-        duration: 6000,
-      })
-      showDrawer.value = false
-      showOrderSuccess.value = true
-      cartStore.fetchCartItems()
-    }
+  if (form.value.paymentMethod === 'PAYSTACK') {
+    formData.append('paymentRef', paystackData.value?.reference)
   }
-  loading.value = false
+
+  authStore.toggleLoader()
+
+  const response = await cartStore.createOrder(formData)
+  if (response.success) {
+    toast.success('Order created successfully', {
+      position: 'top',
+      duration: 6000,
+    })
+    showDrawer.value = false
+    showOrderSuccess.value = true
+    cartStore.fetchCartItems()
+  }
+  authStore.toggleLoader()
 }
 
-const handlePaystackPayment = (data: any) => {
-  paystackData.value = data
-  setTimeout(() => {
-    document.getElementById('paystack-modal')?.click()
-  }, 1000)
-}
+// const handlePaystackPayment = (data: any) => {
+//   paystackData.value = data
+//   setTimeout(() => {
+//     document.getElementById('paystack-modal')?.click()
+//   }, 1000)
+// }
 
 const onSuccessfulPayment = () => {
-  cartStore.fetchCartItems()
-  showDrawer.value = false
-  showOrderSuccess.value = true
-
-  cartStore.fetchCartItems()
+  createOrder()
 }
 
 const onCancelledPayment = () => {
@@ -233,6 +244,14 @@ const onCancelledPayment = () => {
     position: 'top',
     duration: 6000,
   })
+}
+
+const getPaystackReference = async () => {
+  const data = await transactionStore.getPaystackReference(String(total.value))
+  if (data.success) {
+    console.log(data.payload)
+    paystackData.value = data.payload
+  }
 }
 
 watch(

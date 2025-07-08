@@ -21,10 +21,11 @@
         ></v-text-field>
 
         <v-file-input
-          accept="image/png, image/jpeg, image/bmp"
+          accept="image/png, image/jpeg, image/pdf"
           label="Photos"
           placeholder="Upload your photos"
           prepend-icon="mdi-camera"
+          :key="reRender"
           @change="saveFileToLocal"
         ></v-file-input>
 
@@ -40,10 +41,15 @@
           </div>
         </div>
 
+        <p class="tw-text-primary" v-if="exceedFileSize && files.length">
+          File size exceeds the maximum limit of 2MB.
+        </p>
+
         <div class="text-center">
           <v-btn
             class="tw-my-8 tw-w-full !tw-h-[50px] !tw-rounded-full"
             color="primary"
+            :disabled="exceedFileSize"
             @click="proceedToUpload"
             :loading="loading"
           >
@@ -63,7 +69,10 @@ import { useToast } from 'vue-toast-notification'
 interface CustomFile extends File {
   src?: string
 }
+
+const maxFileSize = 2000000 // 2MB
 const toast = useToast()
+
 const props = defineProps<{
   show: boolean
   showAmount?: boolean
@@ -74,6 +83,9 @@ const emit = defineEmits<{
   (e: 'uploadImageUrls', urls: any[]): void
   (e: 'amount', value: string): void
 }>()
+
+const exceedFileSize = ref(false)
+const reRender = ref(1)
 
 const showModal = computed({
   get() {
@@ -91,12 +103,17 @@ const files = ref<CustomFile[]>([])
 function saveFileToLocal(event: any): void {
   const file: File = event.target.files[0]
   if (!file) return
+  else if (file.size > maxFileSize) {
+    exceedFileSize.value = true
+  }
 
   handleFilePreview(file)
 }
 
 function removeFile(idx: number) {
+  exceedFileSize.value = false
   files.value.splice(idx, 1)
+  reRender.value = !reRender.value
 }
 
 function handleFilePreview(file: CustomFile) {
@@ -104,7 +121,7 @@ function handleFilePreview(file: CustomFile) {
 
   reader.onload = function (e) {
     file['src'] = e.target?.result as string
-    files.value.push(file)
+    files.value[0] = file
   }
 
   reader.readAsDataURL(file)
