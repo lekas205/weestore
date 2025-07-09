@@ -83,7 +83,7 @@
     id="paystack-topup-modal"
     :amount="paystackData?.amount"
     :email="paystackData?.email"
-    :publicKey="'pk_test_9e8d9cbc7f3a81655b977db8106a8c330010cf9d'"
+    :publicKey="paystackPublicKey"
     :reference="paystackData?.reference"
     :callback="paystackData?.callback_url"
     :onSuccess="onSuccessfulPayment"
@@ -103,6 +103,8 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = useAuthStore()
 const toast = useToast()
 const transactionStore = useTransactionStore()
+
+const paystackPublicKey = computed(() => import.meta.env.VITE_PAYSTACK_PUBLIC_KEY)
 
 const props = defineProps<{
   show: boolean
