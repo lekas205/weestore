@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.617.0",
+    "@capacitor/android": "^7.4.1",
+    "@capacitor/core": "^7.4.1",
     "@mdi/font": "^7.4.47",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
@@ -33,6 +35,8 @@
     "vuetify": "^3.7.12"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.4.1",
     "@tsconfig/node22": "^22.0.0",
     "@types/node": "^22.13.1",
     "@vitejs/plugin-vue": "^5.2.1",
