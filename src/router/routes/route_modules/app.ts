@@ -12,7 +12,7 @@ export default [
     meta: {
       title: ROUTES.home.title,
       layout: 'private',
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
 
@@ -63,7 +63,7 @@ export default [
     meta: {
       title: ROUTES.groceries.title,
       layout: 'private',
-      requiresAuth: true,
+      requiresAuth: false,
     },
   },
 ]

@@ -7,7 +7,7 @@ async function fetchProduct(params: any) {
 }
 
 async function fetchCategories() {
-  return await http.get<APIResponse>(ENDPOINTS.CATEGORIES)
+  return await http.get<APIResponse>(ENDPOINTS.GET_CATEGORIES)
 }
 
 async function fetchCustomerOrder() {

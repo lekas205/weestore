@@ -200,6 +200,14 @@ const withdrawToBank = () => {
 }
 
 const AddToCart = async () => {
+  if (!localStorage.getItem('ACCESS_TOKEN')) {
+    toast.error('Please login to add product to cart', {
+      position: 'top',
+      duration: 6000,
+    })
+    return router.push({ name: ROUTES.login.name })
+  }
+
   loading.value = true
   const res = await cartStore.addToCart({
     quantity: quantity.value.toString(),
@@ -256,7 +264,6 @@ const transferToBank = async (unit: number | string) => {
 
     showDrawer.value = false
   }
-
   authStore.toggleLoader()
 }
 
