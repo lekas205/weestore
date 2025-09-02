@@ -22,13 +22,15 @@ router.beforeEach((to, _from, next) => {
     next({ name: ROUTES.login.name })
   } else if (requiresAuth && !isUserLoggedIn) {
     next(`${ROUTES.login.path}?next=${to.path}`)
-  } else if (!requiresAuth && isUserLoggedIn) {
-    if (to.name == ROUTES.home.name) {
-      next()
-    } else {
-      next({ name: ROUTES.home.name })
-    }
-  } else {
+  }
+  //  else if (!requiresAuth && isUserLoggedIn) {
+  //   if (to.name == ROUTES.home.name) {
+  //     next()
+  //   } else {
+  //     next({ name: ROUTES.home.name })
+  //   }
+  // }
+  else {
     next()
   }
 })
