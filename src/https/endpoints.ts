@@ -16,8 +16,9 @@ export const PURCHASED_PRODUCTS = `/v1${customer}/purchased/product`
 export const CHANGE_PIN = `/v1${customer}/password`
 export const RESEND_OTP = `/v1${customer}/resend-otp`
 export const RESEND_PHONE_OTP = `/v1${customer}/phone/otp`
-export const PRODUCTS = `/v1${customer}/product`
+export const PRODUCTS = `/v1/products`
 export const CATEGORIES = `/v1${customer}/categories`
+export const GET_CATEGORIES = `/v1/category`
 export const CHANGE_ADDRESS = `/v1${customer}/address`
 
 export const GET_ACCOUNT_DETAILS = `${bank}/lookup-account`

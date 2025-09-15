@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-navigation-drawer v-model="showDrawer" temporary :width="450" color="#F4F4F8">
-      <section class="tw-p-5 tw-flex tw-flex-col">
+      <section class="tw-p-5 tw-flex tw-flex-col tw-mt-6">
         <AppHeader back @go-back="showDrawer = false" title="Product Details" hideCartIcon />
 
         <swiper
@@ -200,6 +200,14 @@ const withdrawToBank = () => {
 }
 
 const AddToCart = async () => {
+  if (!localStorage.getItem('ACCESS_TOKEN')) {
+    toast.error('Please login to add product to cart', {
+      position: 'top',
+      duration: 6000,
+    })
+    return router.push({ name: ROUTES.login.name })
+  }
+
   loading.value = true
   const res = await cartStore.addToCart({
     quantity: quantity.value.toString(),
@@ -256,7 +264,6 @@ const transferToBank = async (unit: number | string) => {
 
     showDrawer.value = false
   }
-
   authStore.toggleLoader()
 }
 
