@@ -65,4 +65,9 @@ export const ROUTES: RouteLayout = {
     name: 'Payment History',
     title: 'Payment History',
   },
+  savings: {
+    path: '/savings',
+    name: 'Savings',
+    title: 'Savings',
+  },
 }

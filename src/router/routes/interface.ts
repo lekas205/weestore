@@ -9,6 +9,7 @@ export interface RouteLayout {
   home: RouteInterface
   wallet: RouteInterface
   profile: RouteInterface
+  savings: RouteInterface
   groceries: RouteInterface
   products: RouteInterface
   new_pin: RouteInterface

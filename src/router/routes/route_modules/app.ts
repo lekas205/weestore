@@ -66,4 +66,14 @@ export default [
       requiresAuth: false,
     },
   },
+  {
+    path: ROUTES.savings.path,
+    name: ROUTES.savings.name,
+    component: () => import(/* webpackChunkName: "about" */ '@/views/savings/index.vue'),
+    meta: {
+      title: ROUTES.savings.title,
+      layout: 'private',
+      requiresAuth: false,
+    },
+  },
 ]

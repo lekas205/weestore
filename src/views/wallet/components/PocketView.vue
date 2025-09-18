@@ -53,6 +53,7 @@ const actions = ref([
   { icon: 'money', label: 'Top up', value: 'top-up' },
   { icon: 'gift', label: 'Restock', value: 'buy-marketplace' },
   { icon: 'wallet', label: 'Buy Groceries', value: 'buy-groceries' },
+  { icon: 'wallet', label: 'Save to Buy', value: 'savings' },
 ])
 
 const extractImgUrl = (icon: string) => {
@@ -66,6 +67,8 @@ const handleAction = (item: string) => {
     router.push({ name: ROUTES.home.name })
   } else if (item === 'buy-groceries') {
     router.push({ name: ROUTES.groceries.name })
+  } else if (item === 'savings') {
+    router.push({ name: ROUTES.savings.name })
   }
 }
 </script>
