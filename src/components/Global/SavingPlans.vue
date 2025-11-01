@@ -53,7 +53,7 @@
     </v-navigation-drawer>
   </v-layout>
 
-  <SavingsSetup :show="showSetupDrawer" />
+  <SavingsSetup v-model:show="showSetupDrawer" />
 
   <AppBottomSheet v-model:show="showSheet">
     <SavingMethod @next="openSavingConfig($event)" />

@@ -24,6 +24,7 @@
         </div>
 
         <div
+          @click="showSavingsInterest = true"
           class="tw-bg-white tw-rounded-xl tw-p-3 text-center tw-shadow-md tw-w-[47%] tw-flex tw-flex-col tw-justify-center"
         >
           <p class="tw-text-[#009930]">My Interest</p>
@@ -47,7 +48,37 @@
       </v-tab>
     </v-tabs>
 
-    <SavingPlans :show="showSavingsPlan" />
+    <v-tab-item v-if="tab === 'active-circle'">
+      <div class="tw-w-[90vw]">
+        <section class="tw-overflow-auto">
+          <div class="tw-flex tw-gap-4">
+            <CircleBreakDownCard
+              circle_title="Bronze Circle"
+              class="tw-shrink-0 tw-w-[85%]"
+              v-for="i in 3"
+              :key="i"
+            />
+          </div>
+        </section>
+      </div>
+    </v-tab-item>
+    <v-tab-item v-if="tab === 'completed-circle'">
+      <div class="tw-w-[90vw]">
+        <section class="tw-overflow-auto">
+          <div class="tw-flex tw-gap-4">
+            <CircleBreakDownCard
+              circle_title="Bronze Circle"
+              class="tw-shrink-0 tw-w-[85%]"
+              v-for="i in 3"
+              :key="i"
+            />
+          </div>
+        </section>
+      </div>
+    </v-tab-item>
+
+    <SavingPlans v-model:show="showSavingsPlan" />
+    <SavingsInterests v-model:show="showSavingsInterest" />
   </div>
 </template>
 
@@ -56,7 +87,10 @@ import { ref } from 'vue'
 import AppHeader from '@/components/Global/AppHeader.vue'
 import { formatAsMoney } from '@/utils/helpers.ts'
 import SavingPlans from '@/components/Global/SavingPlans.vue'
+import CircleBreakDownCard from '@/components/Global/CircleBreakDownCard.vue'
+import SavingsInterests from '@/components/Global/SavingsInterests.vue'
 
 const tab = ref(null)
 const showSavingsPlan = ref(false)
+const showSavingsInterest = ref(false)
 </script>

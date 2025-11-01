@@ -8,7 +8,7 @@ const myCustomLightTheme = {
     primary: '#FA4A0C',
     blue: '#06177A',
     orange: '#F65901',
-    green: '#009930',
+    green: '#32D74B',
     lime: '#CFBB03',
     wine: '#AE0C0C',
     brown: '#AE6D0C',

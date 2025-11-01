@@ -64,6 +64,8 @@
     </v-navigation-drawer>
   </v-layout>
 
+  <SavingsPaymentMethod v-model:show="showPaymentDrawer" />
+
   <AppBottomSheet v-model:show="showSheet">
     <SavingsSummary @next="openSavingConfig($event)" />
   </AppBottomSheet>
@@ -73,6 +75,7 @@
 import { ref, computed } from 'vue'
 import AppBottomSheet from './AppBottomSheet.vue'
 import SavingsSummary from '../Sheets/SavingsSummary.vue'
+import SavingsPaymentMethod from './SavingsPaymentMethod.vue'
 
 const props = defineProps<{
   show: boolean
@@ -81,6 +84,7 @@ const emit = defineEmits<{
   (e: 'update:show', value: boolean): void
 }>()
 
+const showPaymentDrawer = ref(false)
 const form = ref({ amount: '', target: '', frequency: 'Daily' })
 const showSheet = ref(false)
 const frequencies = ref(['Daily', 'Weekly', 'Monthly'])
@@ -97,5 +101,6 @@ const showDrawer = computed({
 const openSavingConfig = (method: string) => {
   showSheet.value = false
   console.log(method)
+  showPaymentDrawer.value = true
 }
 </script>

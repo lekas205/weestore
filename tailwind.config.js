@@ -9,6 +9,7 @@ export default {
         light: '#F4F4F8',
         success: '#009930',
         primary: '#FA4A0C',
+        green: '#32D74B',
       },
     },
   },

@@ -5,6 +5,7 @@
         <button
           variant="text"
           @click="setSheet = false"
+          v-if="!hideCloseIcon"
           class="tw-absolute tw-top-5 tw-right-3 tw-shadow-lg tw-rounded-full tw-h-[25px] tw-w-[25px]"
         >
           <v-icon icon="mdi-close" size="20"></v-icon>
@@ -20,6 +21,7 @@ import { computed } from 'vue'
 
 const props = defineProps<{
   show: boolean
+  hideCloseIcon?: boolean
 }>()
 const emit = defineEmits<{
   (e: 'update:show', value: boolean): void

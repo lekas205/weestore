@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <p class="mb-3 tw-text-[18px]">Payment method</p>
+    <p class="mb-3 tw-text-[18px]" v-if="!hideTitle">Payment method</p>
 
     <section class="tw-p-6 tw-bg-white tw-shadow-md tw-rounded-xl">
       <v-container fluid>
@@ -29,6 +29,10 @@ import { ref } from 'vue'
 import BankPayment from '../Modals/BankPayment.vue'
 
 const method = defineModel()
+
+defineProps<{
+  hideTitle?: boolean
+}>()
 
 const emit = defineEmits<{
   (e: 'uploadedImageUrls', value: string[]): void
