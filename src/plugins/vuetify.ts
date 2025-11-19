@@ -2,6 +2,8 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import { VPie } from 'vuetify/labs/VPie'
+
 const myCustomLightTheme = {
   dark: false,
   colors: {
@@ -20,7 +22,10 @@ const myCustomLightTheme = {
 }
 
 const vuetify = createVuetify({
-  components,
+  components: {
+    ...components,
+    VPie,
+  },
   directives,
   theme: {
     defaultTheme: 'myCustomLightTheme',

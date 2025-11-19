@@ -35,8 +35,8 @@
             @click="submit"
             :loading="loading"
           >
-            Change Address</v-btn
-          >
+            {{ profile?.bank ? 'Change Bank Account' : 'Add Bank Account' }}
+          </v-btn>
         </div>
       </v-card>
     </v-dialog>

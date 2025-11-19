@@ -1,8 +1,13 @@
 <template>
   <v-layout>
     <v-navigation-drawer v-model="showDrawer" temporary :width="450" color="#F4F4F8">
-      <div class="tw-px-[30px] tw-mt-[50px]">
-        <button class="tw-absolute tw-top-[40px]" @click="showDrawer = false">
+      <img
+        src="../../assets//images/png/app-background-image.png"
+        alt=""
+        class="tw-fixed tw-left-0 tw-w-[110vw] tw-h-[100%] tw-top-0 tw-z-0"
+      />
+      <div class="tw-px-[30px] tw-mt-[50px] tw-relative">
+        <button class="tw-absolute tw-top-0" @click="showDrawer = false">
           <v-icon icon="mdi-arrow-left" end></v-icon>
         </button>
 
@@ -11,7 +16,7 @@
           <p>{{ props.circle_type }}</p>
         </div>
 
-        <section class="mt-10">
+        <section class="mt-10 tw-bg-white tw-p-3 tw-rounded-md">
           <div class="tw-flex py-4 tw-border-b tw-border-gray-300 tw-justify-between">
             <span class="tw-text-[14px]">Amount Saved so far</span>
             <span class="tw-font-semibold tw-text-[#372E52]"> {{ formatAsMoney(60000) }} </span>
@@ -44,25 +49,25 @@
             <span class="tw-text-[14px]">Next Contribution date </span>
             <span class="tw-font-semibold tw-text-[#372E52]"> 3rd April </span>
           </div>
-        </section>
 
-        <div class="tw-flex tw-gap-3 tw-mt-[30px] tw-justify-center">
-          <v-btn
-            class="tw-mt-10 !tw-h-[40px] !tw-rounded-full !tw-capitalize !tw-underline"
-            color="green"
-            variant="text"
-            @click="showSheet = true"
-          >
-            Pause Circle
-          </v-btn>
-          <v-btn
-            class="tw-mt-10 !tw-h-[40px] !tw-rounded-full !tw-capitalize"
-            color="primary"
-            @click="showWithdrawalSheet = true"
-          >
-            Withdraw
-          </v-btn>
-        </div>
+          <div class="tw-flex tw-gap-3 tw-mt-[30px] tw-mb-7 tw-justify-center">
+            <v-btn
+              class="tw-mt-10 !tw-h-[40px] !tw-rounded-full !tw-capitalize !tw-underline"
+              color="green"
+              variant="text"
+              @click="showSheet = true"
+            >
+              Pause Circle
+            </v-btn>
+            <v-btn
+              class="tw-mt-10 !tw-h-[40px] !tw-rounded-full !tw-capitalize"
+              color="primary"
+              @click="showWithdrawalSheet = true"
+            >
+              Withdraw
+            </v-btn>
+          </div>
+        </section>
       </div>
     </v-navigation-drawer>
   </v-layout>

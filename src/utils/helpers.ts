@@ -21,7 +21,7 @@ export function formatAsMoney(amount: number, currency = true): string {
 export const formatDate = (date?: Date) => {
   const d = new Date(date || Date.now())
   return d.toLocaleString(['en-Us'], {
-    weekday: 'long',
+    weekday: 'short',
     month: 'short',
     day: '2-digit',
     year: 'numeric',

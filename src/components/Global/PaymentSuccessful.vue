@@ -1,7 +1,12 @@
 <template>
   <v-layout>
     <v-navigation-drawer v-model="showDrawer" temporary :width="450" color="#F4F4F8">
-      <div class="text-center tw-mt-[70px]">
+      <img
+        src="../../assets//images/png/app-background-image.png"
+        alt=""
+        class="tw-fixed tw-left-0 tw-w-[110vw] tw-h-[100%] tw-top-0 tw-z-0"
+      />
+      <div class="text-center tw-mt-[70px] tw-relative">
         <img
           src="../../assets/images/svgs/check-icon.svg"
           alt=""
